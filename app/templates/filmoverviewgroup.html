@@ -1,0 +1,25 @@
+<header ng-show="(filme | hasLiteral:group | filter:searchText).length > 0" class="h3">{{group}} <span class="badge" style="vertical-align:middle;">{{ (filme | hasLiteral:group | filter:searchText).length }}</span></header>
+<div ng-show="(filme | hasLiteral:group | filter:searchText).length > 0" class="panel panel-default">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="width: 30%" translate>FILMTITEL</th>
+                <th style="width: 30%" translate>ORIGINALTITEL</th>
+                <th style="width: 30%" translate>REGISSEUR</th>
+                <th style="width: 7%"></th>
+                <th style="width: 3%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="film in filme | hasLiteral:group | filter:searchText | orderBy:'Originaltitel'">
+                <td><a href="#/filme/{{film.FilmID}}">{{film.Filmtitel}}</a></td>
+                <td><a href="#/filme/{{film.FilmID}}">{{film.Originaltitel}}</a></td>
+                <td><a href="#/filme/{{film.FilmID}}">{{film.Regiseurvorname}} {{film.Regiseurnachname}}</a></td>
+                <td><a href="#/filme/{{film.FilmID}}" class="btn btn-info btn-xs pull-right" tooltip-html-unsafe="{{  'DETAILSZUFILM' | translate:{filmtitle: film.Filmtitel}  }}"><span class="glyphicon glyphicon-info-sign"></span> </a></td>
+                <td>
+                    <button data-toggle="modal" data-target="#myModal" ng-click="setSelectedFilm(film)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'FILMLOESCHENBUTTON' | translate:{filmtitle: film.Filmtitel} }}"><span class="glyphicon glyphicon glyphicon-remove"></span> </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,18 @@
+<!-- Modal -->
+<div class="modal fade" id="myCostumeDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ 'KOSTUEMLOESCHENHEADING' | translate:{kurztext: selectedCostume.Kostuemkurztext} }}</h4>
+            </div>
+            <div class="modal-body" translate="KOSTUEMLOESCHENTEXT" translate-values="{kostuemid: selectedCostume.KostuemID, kostuemkurztext: selectedCostume.Kostuemkurztext}">
+
+            </div>
+            <div class="modal-footer">
+                <button onclick="$('#myCostumeDeleteModal').modal('hide');" type="button" class="btn btn-danger" ng-click="deleteCostume(selectedCostume)">{{ 'KOSTUEMLOESCHEN' | translate }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ABBRECHEN' | translate }}</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog  -->
+</div><!-- /.modal -->

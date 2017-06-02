@@ -1,0 +1,73 @@
+<!-- Contentbereich / zwei Spalten -->
+<div  ng-controller="TestCtrl">
+
+
+<style>
+    div.picture1 {
+    width:1000px; /*width of your image*/
+    height:700px; /*height of your image*/
+    background-image:url('../images/femaleForm.jpg');
+    margin:0; /* If you want no margin */
+    padding:0; /*if your want to padding */
+    }
+</style>
+
+
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <h1>Test</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" >Kostüm auswählen</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form class="navbar-form" >
+                            <div class="form-group">
+                                <input type="number" string-to-number ng-model="filmIDInput"  class="form-control" placeholder="FilmID">
+                                <input type="number" string-to-number ng-model="rollenIDInput" class="form-control" placeholder="RollenID">
+                                <input type="number" string-to-number ng-model="kostuemIDInput" class="form-control" placeholder="KostuemID">
+                            </div>
+
+                        </form>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" >Basiselement visualisieren</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <button ng-click="" >Load Values</button>
+                        <button ng-click="drawAgain()" >Draw Network</button>
+                        <button ng-click="sortGraphElements()" >Clear Nodes</button>
+                        <button ng-click="clusterByBasic()" >Cluster</button>
+
+                        <div style="width: auto; height: 600px" id="mynetwork" ></div>
+                        <div class="picture1" id ="mynetwork2"></div>
+
+
+                        <accordion>
+                        <accordion-group  is-open="isopen">
+                            <accordion-heading>
+                              Netzwerk <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                            </accordion-heading>
+                            <div >
+
+                                <span ng-bind="isopen"></span>
+                            </div>
+
+                            </accordion-group>
+                        </accordion>
+
+                    </div>
+                </div>
+
+</div>
+            </div>
+        </div> </div></div>

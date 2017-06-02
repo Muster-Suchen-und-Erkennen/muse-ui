@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="myTeilelementDeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Teilelement l&ouml;schen</h4>
+            </div>
+            <div class="modal-body">
+                <p>Soll das Teilelement</p>
+                <p><h2>#{{selectedTeilelement.TeilelementID}}: {{selectedTeilelement.Teilelementname}}</h2></p>
+                <p>wirklich gel&ouml;scht werden?</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="$('#myTeilelementDeleteModal').modal('hide');" type="button" class="btn btn-danger" ng-click="deleteTeilelement(selectedTeilelement)">Teilelement l&ouml;schen</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog  -->
+</div><!-- /.modal -->

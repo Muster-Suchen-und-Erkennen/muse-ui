@@ -1,0 +1,156 @@
+<!-- Modal -->
+<div class="modal fade" id="myTeilelementDetailModal" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog bigger-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <h3 ng-if="selectedTeilelement.TeilelementID === 'new'" class="modal-title" id="myModalLabelNew"><b>{{ 'TEILELEMENTANLEGEN' | translate }}: {{selectedTeilelement.Teilelementname}}</b></h3>
+
+                        <h3 ng-if="selectedTeilelement.TeilelementID !== 'new'" class="modal-title" id="myModalLabel"><b>{{ 'TEILELEMENT' | translate }}:
+                            {{selectedTeilelement.Teilelementname}}</b></h3>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input ng-model="initTEID" type="text" class="form-control" placeholder="ID">
+                            <span class="input-group-btn">
+                                <button ng-click="loadValuesFromTE(initTEID)" class="btn btn-default" type="button">Init!</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <button ng-click="resetSelectedTeilelement()" type="button" class="btn btn-default pull-right">{{ 'ZURUECKSETZEN' | translate }} <span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <form name="myTeilelementDetailForm" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="TeilelementID" class="col-sm-3 control-label">{{ 'TEILELEMENTID' | translate }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" disabled class="form-control" id="TeilelementID" value="{{selectedTeilelement.TeilelementID}}">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid, 'has-error': !teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'TEILELEMENTNAME' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid,
+                                                'label-danger': !teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid,
+                                                    'glyphicon-warning-sign': !teValidator.validationConstraints['selectedTeilelement.Teilelementname'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <single-tree-select
+                                id="TeilelementnameTree"
+                                tree-model="selectables.teilelemente"
+                                selection="selectedTeilelement.Teilelementname"
+                                btn-div-class="col-sm-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.teilelemente"
+                                placeholder="{{ 'TEILELEMENTNAME' | translate }}">
+                        </single-tree-select>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid, 'has-error': !teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'DESIGNS' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid,
+                                                'label-danger': !teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid,
+                                                    'glyphicon-warning-sign': !teValidator.validationConstraints['selectedTeilelement.TeilelementDesigns'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <tree-select
+                                id="TeilelementDesigns"
+                                tree-model="selectables.designs"
+                                selection="selectedTeilelement.TeilelementDesigns"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.designs"
+                                placeholder="{{ 'DESIGNS' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'FORMEN' | translate }}</label>
+                        <tree-select
+                                id="TeilelementFormen"
+                                tree-model="selectables.formen"
+                                selection="selectedTeilelement.TeilelementFormen"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.formen"
+                                placeholder="{{ 'FORMEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'TRAGEWEISEN' | translate }}</label>
+                        <tree-select
+                                id="TeilelementTrageweisen"
+                                tree-model="selectables.trageweisen"
+                                selection="selectedTeilelement.TeilelementTrageweisen"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.trageweisen"
+                                placeholder="{{ 'TRAGEWEISEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'ZUSTAENDE' | translate }}</label>
+                        <tree-select
+                                id="TeilelementZustaende"
+                                tree-model="selectables.zustaende"
+                                selection="selectedTeilelement.TeilelementZustaende"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.zustaende"
+                                placeholder="{{ 'ZUSTAENDE' | translate }}">
+                        </tree-select>
+                    </div>
+                    <material-picker
+                            tree-model = "selectables.materialien"
+                            selectable-materialien = "selectables.flattenLists.materialien"
+                            selectable-materialeindruecke = "selectables.materialeindruecke"
+                            selection = "selectedTeilelement.TeilelementMaterialien"
+                            id-field-name = "TeilelementID"
+                            targetId = "selectedTeilelement.TeilelementID"
+                            validation="teValidator.validationConstraints['selectedTeilelement.TeilelementMaterialien'].valid"
+                            showvalidation>
+                    </material-picker>
+                    <colour-picker
+                            tree-model = "selectables.farben"
+                            selectable-dominantefarbe = "selectables.flattenLists.farben"
+                            selectable-farbeindruecke = "selectables.farbeindruecke"
+                            selection = "selectedTeilelement.TeilelementFarben"
+                            id-field-name = "TeilelementID"
+                            targetId = "selectedTeilelement.TeilelementID"
+                            validation="teValidator.validationConstraints['selectedTeilelement.TeilelementFarben'].valid"
+                            showvalidation>
+                    </colour-picker>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-disabled="!teValidator.validationResult.valid" ng-if="selectedTeilelement.TeilelementID === 'new'" onclick="$('#myTeilelementDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="createTeilelement(selectedTeilelement)"> {{ 'ANLEGEN' | translate }}
+                </button>
+                <button ng-disabled="!teValidator.validationResult.valid" ng-if="selectedTeilelement.TeilelementID !== 'new'" onclick="$('#myTeilelementDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="updateTeilelement(selectedTeilelement)"> {{ 'AENDERN' | translate }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ABBRECHEN' | translate }}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog  -->
+</div><!-- /.modal -->

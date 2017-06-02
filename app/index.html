@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="MUSE">
+    <head>
+        <meta charset="UTF-8">
+        <title translate>TITEL</title>
+
+        <!-- build:css styles/css/app.css -->
+        <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="bower_components/animate.css/animate.css" rel="stylesheet">
+        <link href="bower_components/ionicons/css/ionicons.css" rel="stylesheet">
+        <link href="bower_components/angular-loading-bar/build/loading-bar.css" rel="stylesheet">
+        <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet">
+        <link href="stylesheets/style.css" rel="stylesheet">
+        <!-- endbuild -->
+    </head>
+    <body ng-controller="IndexCtrl">
+    <!-- Navigationsleiste -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#/filmuebersicht" translate>MARKE</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse"
+                 id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" >
+                    <li ng-repeat="item in menu" ng-class="{active: item.route == menuActive }"><a href="#{{item.route}}">{{item.label | translate}}</a>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="disabled">{{ 'BACKEND' | translate }} <b>{{ backend.restBackendAddress }}</b></a></li>
+                    <li><a class="btn btn-link" ng-class="{active: states.language === 'de'}" ng-click="changeLanguage('de')">DE</a></li>
+                    <li><a class="btn btn-link" ng-class="{active: states.language === 'en'}" ng-click="changeLanguage('en')">EN</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+    <ng-include src="'templates/modal/loading.html'"></ng-include>
+    <ng-include src="'templates/modal/errorModal.html'"></ng-include>
+    <div ng-view></div>
+
+    <!-- build:js javascript/app.js -->
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload-html5-shim.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/ng-file-upload/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-utils/ui-utils.js"></script>
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate/angular-translate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="bower_components/angular-tree-control/angular-tree-control.js"></script>
+    <script type="text/javascript" src="bower_components/moment/moment.js"></script>
+
+    <script type="text/javascript" src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script type="text/javascript" src="bower_components/jsplumb/dist/js/jsPlumb-2.0.7.js"></script>
+
+    <script type="text/javascript" src="javascript/myapp.js"></script>
+    <script type="text/javascript" src="javascript/filters/FlattenTree.js"></script>
+    <script type="text/javascript" src="javascript/filters/hasLiteral.js"></script>
+    <script type="text/javascript" src="javascript/filters/uniqueItemList.js"></script>
+    <script type="text/javascript" src="javascript/filters/removeKoerperteile.js"></script>
+
+    <script type="text/javascript" src="javascript/services/dbREST.js"></script>
+    <script type="text/javascript" src="javascript/services/validator.js"></script>
+    <script type="text/javascript" src="javascript/services/validationFuctions.js"></script>
+    <script type="text/javascript" src="javascript/services/entityModels.js"></script>
+    <script type="text/javascript" src="javascript/services/authService.js"></script>
+    <script type="text/javascript" src="javascript/l10n/translate.js"></script>
+
+    <script type="text/javascript" src="javascript/directives/filmPageHead.js"></script>
+    <script type="text/javascript" src="javascript/directives/timePicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/materialPicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/colourPicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/altersPicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/spielortPicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/spielzeitPicker.js"></script>
+    <script type="text/javascript" src="javascript/directives/alert.js"></script>
+    <script type="text/javascript" src="javascript/directives/treeSelector.js"></script>
+    <script type="text/javascript" src="javascript/directives/singleTreeSelector.js"></script>
+    <script type="text/javascript" src="javascript/directives/imageViewer.js"></script>
+    <script type="text/javascript" src="javascript/directives/bsImageViewerDialog.js"></script>
+
+    <script type="text/javascript" src="javascript/controllers/FilmCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/FilmOverviewCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/GenreOverviewCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/RoleCostumeCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/CostumeCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/TestCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/SearchCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/LoginCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/IndexCtrl.js"></script>
+    <!-- endbuild -->
+
+    </body>
+</html>

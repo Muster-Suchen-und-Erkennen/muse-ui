@@ -1,0 +1,374 @@
+
+.loading-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    overflow: auto;
+    overflow-y: scroll;
+}
+
+.spinner {
+    position: relative;
+    width: auto;
+    margin-top: 150px;
+}
+
+.spinner p {
+    text-align: center;
+    color: #ffffff;
+    font-size: 80px;
+}
+
+body {
+    padding-top: 30px;
+}
+.fader.ng-hide-add {
+    opacity: 1.0;
+    display: block !important;
+    transition: opacity 1s;
+}
+
+.fader.ng-hide-add-active {
+    opacity: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .bigger-modal {
+        width: 1000px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .imageviewer-modal {
+        width: 1024px;
+    }
+}
+
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+/* rn-carousel stuff */
+.my-slider {
+    width: 100%;
+    font-size:0;
+}
+.my-slider li {
+    box-sizing: border-box;
+    font-size:30px;
+    position:relative;
+}
+.my-slider li div.debug {
+    box-sizing: border-box;
+    position:absolute;
+    bottom:0;
+    height:50px;
+    background:rgba(0,0,0,0.7);
+    color:white;
+    font-size:12px;
+    width:100%;
+    padding:5px;
+}
+.my-slider.standard li {
+    text-align:center;
+    padding:20px;
+    font-size:20px;
+}
+.big {
+    margin-top:30px;
+    width:100%;
+    font-size:30px;
+}
+.controls {
+    margin-top:5px;
+    width:450px;
+    text-align: center;
+}
+.ng-cloak {
+    display:none;
+}
+.center {
+    text-align:center;
+}
+.thumbs {
+    width:450px;
+    text-align:center;
+}
+.thumb {
+    display: inline-block;
+    background-size:cover;
+    border:1px solid transparent;
+    margin:2px 4px;
+    width:60px;
+    height:40px;
+    transition: border 0.2s ease-in;
+}
+.museimage {
+    margin:auto;
+    width: 100%;
+}
+.is-active {
+    border:1px solid red;
+}
+.details {
+    color:white;
+    font-size:12px;
+    margin-bottom:10px;
+}
+.button{
+    display: inline-block;
+    text-decoration: none;
+    font: bold 12px/12px HelveticaNeue, Arial;
+    padding: 8px 11px;
+    color: #555;
+    border: 1px solid #dedede;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    cursor:pointer;
+}
+.button:disabled {
+    cursor: default !important;
+    color: #aaa !important;
+}
+.button.grey{
+    background: #bdbdbd;
+    background: -webkit-gradient(linear, left top, left bottom, from(#cacaca), to(#aeaeae)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #cacaca, #aeaeae);
+    border-color: #b5b5b5 #a1a1a1 #8f8f8f;
+    color: #555;
+    text-shadow: 0 1px 0 #d4d4d4;
+}
+.button.grey:hover{
+    background: #c2c2c2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#bcbcbc), to(#c2c2c2)); /*  WebKit */
+    background: -moz-linear-gradient(top,  #bcbcbc, #c2c2c2);
+    border-color: #989898 #8e8e8e #878787;
+    text-shadow: 0 1px 0 #dadada;
+}
+
+.taglist {
+    display: inline;
+    list-style: none;
+    padding-inline-start: 0px;
+    -webkit-padding-start: 0px;
+}
+.taglist li {
+    display: inline;
+}
+.taglist li:after {
+    content: ",  ";
+}
+.taglist li:last-child:after {
+    content: "";
+}
+
+.alert-inline {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+    padding-left: 10px;
+    border: 4px solid #f0ad4e;
+    border-radius: 5px;
+}
+
+
+/* Style für Alerts */
+.alert > div > p,
+.alert > div > ul {
+    margin-bottom: 0;
+}
+.alert > div > p + p {
+    margin-top: 5px;
+}
+.fadable-alert.ng-enter {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+.fadable-alert.ng-leave {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+.slide-reveal.ng-enter {
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
+    opacity: 0.5;
+    position: relative;
+    opacity: 0;
+    top: 10px;
+}
+.slide-reveal.ng-enter.ng-enter-active {
+    top: 0;
+    opacity: 1;
+}
+
+/* Style für TreeSelect */
+.tree-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 300px;
+    padding: 10px 10px;
+    margin: 2px 0 0;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+}
+.tree-menu-fader.ng-hide-remove {
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-name: fadeIn;
+}
+.tree-menu-fader.ng-hide-add {
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-name: fadeOut;
+    animation-duration: 0.5s;
+    animation-name: fadeOut;
+    display: block !important;
+}
+div[data-angular-treeview] {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+}
+div[data-tree-model] ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    overflow: hidden;
+}
+div[data-tree-model] li {
+    position: relative;
+    padding: 0 0 0 20px;
+    line-height: 20px;
+}
+div[data-tree-model] li .expanded {
+    padding: 1px 10px;
+    background-image: url("../images/folder.png");
+    background-repeat: no-repeat;
+}
+div[data-tree-model] li .collapsed {
+    padding: 1px 10px;
+    background-image: url("../images/folder-closed.png");
+    background-repeat: no-repeat;
+}
+div[data-tree-model] li .normal {
+    padding: 1px 10px;
+    background-image: url("../images/file.png");
+    background-repeat: no-repeat;
+}
+div[data-tree-model] li .selected {
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 1px 5px;
+}
+div[data-tree-model] li i,
+div[data-tree-model] li span {
+    cursor: pointer;
+}
+div[data-single-tree-model] ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    overflow: hidden;
+}
+div[data-single-tree-model] li {
+    position: relative;
+    padding: 0 0 0 20px;
+    line-height: 20px;
+}
+div[data-single-tree-model] li .expanded {
+    padding: 1px 10px;
+    background-image: url("../images/folder.png");
+    background-repeat: no-repeat;
+}
+div[data-single-tree-model] li .collapsed {
+    padding: 1px 10px;
+    background-image: url("../images/folder-closed.png");
+    background-repeat: no-repeat;
+}
+div[data-single-tree-model] li .normal {
+    padding: 1px 10px;
+    background-image: url("../images/file.png");
+    background-repeat: no-repeat;
+}
+div[data-single-tree-model] li .selected {
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 1px 5px;
+}
+div[data-single-tree-model] li i,
+div[data-single-tree-model] li span {
+    cursor: pointer;
+}
+
+
+.full-width {
+    width: 100%;
+}
+
+div[treecontrol] {
+    text-decoration: none;
+    user-select: none;
+}
+div[treecontrol] ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    overflow: hidden;
+}
+div[treecontrol] li {
+    position: relative;
+    padding: 0 0 0 20px;
+    line-height: 20px;
+}
+div[treecontrol] li i, div[treecontrol] li span, div[treecontrol] li .tree-label {
+    cursor: pointer;
+    display: inline;
+}
+div[treecontrol] li.tree-node .tree-icon-leaf {
+    display: none;
+}
+div[treecontrol] li.tree-node.tree-node--leaf .tree-icon-leaf {
+    display: inline;
+}
+div[treecontrol] li.tree-node.tree-node--leaf .tree-icon-branch {
+    display: none;
+}
+div[treecontrol] li.tree-node.tree-node--expanded > .tree-icon-branch {
+    background-image: url("../images/folder.png");
+}
+div[treecontrol] li .tree-label--selected {
+    background-color: #eeeeee;
+    font-weight: bold;
+    padding: 1px 5px;
+}
+div[treecontrol] li .tree-icon-branch {
+    padding: 1px 10px;
+    background-image: url("../images/folder-closed.png");
+    background-repeat: no-repeat;
+}
+div[treecontrol] li .tree-icon-leaf {
+    padding: 1px 10px;
+    background-image: url("../images/file.png");
+    background-repeat: no-repeat;
+}
+

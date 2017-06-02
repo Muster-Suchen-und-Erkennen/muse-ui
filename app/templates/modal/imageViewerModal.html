@@ -1,0 +1,17 @@
+<div class="modal fade" id="myImageViewerModal" tabindex="-1">
+    <div class="modal-dialog imageviewer-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="$close()">&times;</button>
+
+                <button type="button" ng-disabled="screenshotIndex === 0" class="btn btn-default" ng-click="prevScreenshot()">{{'BILDERPREV' | translate}}</button>
+                ({{ screenshotIndex + 1 }} | {{ screenshots.length  }})
+                <button type="button" ng-disabled="(screenshotIndex === (screenshots.length - 1)) || (screenshots.length === 0)" class="btn btn-default" ng-click="nextScreenshot()">{{'BILDERNEXT' | translate}}</button>
+            </div>
+            <div class="modal-body">
+                <pre ng-if="loadingLargeImage">{{'LOADINGIMAGE' | translate}}</pre>
+                <img ng-if="loadingLargeImage === false" ng-src="{{screenshots[screenshotIndex].Screenshot}}" class="museimage">
+            </div>
+        </div>
+    </div>
+</div>

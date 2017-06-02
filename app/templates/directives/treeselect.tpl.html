@@ -1,0 +1,33 @@
+<div class="{{btnDivClass}}">
+    <button class="btn btn-default" type="button"
+            ng-click="toggle($event)"
+            ng-class="{ 'active': open }"
+            tabindex="-1">
+        <span class="glyphicon glyphicon-th-list"></span>
+    </button>
+    <div class="tree-menu animated tree-menu-fader" ng-hide="!open">
+        <div>
+            <input ng-model="searchCrit" type="text" class="form-control" ng-change="searchByText(searchCrit)" placeholder="Search Text">
+        </div>
+       <div style="padding-top: 5px">
+           <button ng-click="enlargeAll()" class="btn btn-xs"><span class="glyphicon glyphicon-plus"></span></button>
+           <button ng-click="collapseAll()" class="btn btn-xs"><span class="glyphicon glyphicon-minus"></span></button>
+       </div>
+        <div style="padding-top: 5px">
+            <div data-angular-treeview="true"
+                 data-tree-id="{{ id }}"
+                 data-tree-model="treeModel">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="{{selectDivClass}}">
+    <ui-select multiple ng-model="temp.items"
+               theme="bootstrap"
+               reset-search-input="true">
+        <ui-select-match placeholder="{{ placeholder }}">{{ $item.id }}</ui-select-match>
+        <ui-select-choices repeat="item.id as item in preparedFlattenList | filter: {id: $select.search, label: $select.search}">
+            <div ng-bind-html="item.id | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+</div>

@@ -1,0 +1,59 @@
+<!-- Contentbereich / zwei Spalten -->
+<div  ng-controller="GenreOverviewCtrl">
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <!--<div ng-repeat="alert in alerts" class="animated fadable-alert">
+                <my-alert type="alert.type" close="closeAlert($index)">{{ alert.message }}</my-alert>
+            </div>
+            <div ng-repeat="alert in autoCloseAlerts" class="animated fadable-alert">
+                <my-alert type="alert.type" auto-close-delay="4000" auto-close="autoCloseAlert($index)">{{ alert.message }}</my-alert>
+            </div>-->
+            <h1 translate>GENREUEBERSICHT</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input ng-model="searchText" type="text" class="form-control">
+                              <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-search"></span>
+                              </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <span ng-repeat="genre in genres | orderBy:'label'">
+                                    <a href="" ng-click="gotoAnchor(genre.label)" ng-show="genre.films.length > 0">{{genre.label}}{{$last ? '' : ', '}}</a>
+                                    <span ng-show="genre.films.length == 0">{{genre.label}}{{$last ? '' : ', '}}</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'GENRELISTE' | translate }} <span class="badge">{{ genres.length }}</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="filmoverviewgroup" ng-repeat="genre in genres | orderBy:'label'">
+                            <ng-include src="'templates/genreoverviewgroup.html'"></ng-include>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-include src="'templates/modal/filmdelete.html'"></ng-include>
+</div>

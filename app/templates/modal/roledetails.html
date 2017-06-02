@@ -1,0 +1,255 @@
+<!-- Modal -->
+<div class="modal fade" id="myRoleDetailModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog bigger-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 ng-if="selectedRole.RollenID === 'new'" class="modal-title"><b>{{ 'ROLLEANLEGEN' | translate }}: {{selectedRole.Rollenvorname}}
+                    {{selectedRole.Rollennachname}}</b></h3>
+                <h3 ng-if="selectedRole.RollenID !== 'new'" class="modal-title"><b>{{ 'ROLLE' | translate }}: {{selectedRole.Rollenvorname}}
+                    {{selectedRole.Rollennachname}}</b></h3>
+            </div>
+            <div class="modal-body">
+
+                <form name="myForm" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="Rollenvorname" class="control-label">{{ 'ROLLE' | translate }}</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="selectedRole.Rollenvorname" class="form-control"
+                                   id="Rollenvorname"
+                                   placeholder="{{ 'VORNAME' | translate }}">
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="selectedRole.Rollennachname" class="form-control"
+                                   id="Rollennachname"
+                                   placeholder="{{ 'NACHNAME' | translate }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="Darstellervorname" class="control-label">{{ 'DARSTELLER' | translate }}</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" ng-model="selectedRole.Schauspielervorname" class="form-control"
+                                   id="Darstellervorname"
+                                   typeahead="ssp.Schauspielervorname for ssp in selectables.darstellerVornamen | filter:$viewValue | limitTo: 8"
+                                   placeholder="{{ 'VORNAME' | translate }}">
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="selectedRole.Schauspielernachname" class="form-control"
+                                   id="Darstellernachname"
+                                   typeahead="ssp.Schauspielernachname for ssp in selectables.darstellerNachnamen | filter:$viewValue | limitTo: 8"
+                                   placeholder="{{ 'NACHNAME' | translate }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'ROLLENBERUF' | translate }}</label>
+                        <single-tree-select
+                                id="Rolenberuf"
+                                tree-model="selectables.rollenberufe"
+                                selection="selectedRole.Rollenberuf"
+                                btn-div-class="col-sm-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.rollenberufe"
+                                validation="validation"
+                                placeholder="{{ 'ROLLENBERUF' | translate }}">
+                        </single-tree-select>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-success': roleValidator.validationConstraints['selectedRole.Geschlecht'].valid, 'has-error': !roleValidator.validationConstraints['selectedRole.Geschlecht'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'GESCHLECHT' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': roleValidator.validationConstraints['selectedRole.Geschlecht'].valid,
+                                                'label-danger': !roleValidator.validationConstraints['selectedRole.Geschlecht'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': roleValidator.validationConstraints['selectedRole.Geschlecht'].valid,
+                                                    'glyphicon-warning-sign': !roleValidator.validationConstraints['selectedRole.Geschlecht'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-model="selectedRole.Geschlecht" name="geschlecht"
+                                           id="geschlecht_maennlich"
+                                           value="m&auml;nnlich">
+                                    {{ 'GESCHLECHTMAENNLICH' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-model="selectedRole.Geschlecht" name="geschlecht"
+                                           id="geschlecht_weiblich"
+                                           value="weiblich">
+                                    {{ 'GESCHLECHTWEIBLICH' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-model="selectedRole.Geschlecht" name="geschlecht"
+                                           id="geschlecht_undefiniert"
+                                           value="undefiniert">
+                                    {{ 'GESCHLECHTUNDEFINIERT' | translate }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div ng-class="{'has-success': roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid, 'has-error': !roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid}">
+                            <div class="col-sm-3 text-right">
+                                <label class="control-label">{{ 'DOMINANTERALTERSEINDRUCK' | translate }}</label>
+                                <span class="label"
+                                      ng-class="{   'label-success': roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid,
+                                                    'label-danger': !roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid}">
+                                    <span class="glyphicon"
+                                          ng-class="{   'glyphicon-ok': roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid,
+                                                        'glyphicon-warning-sign': !roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid}">
+                                    </span>
+                                </span>
+                            </div>
+                            <single-tree-select
+                                    id="DominanterAlterseindruck"
+                                    tree-model="selectables.alterseindruecke"
+                                    selection="selectedRole.DominanterAlterseindruck"
+                                    btn-div-class="col-sm-1"
+                                    select-div-class="col-sm-6"
+                                    prepared-flatten-list="selectables.flattenLists.alterseindruecke"
+                                    validation="roleValidator.validationConstraints['selectedRole.DominanterAlterseindruck'].valid"
+                                    placeholder="{{ 'DOMINANTERALTERSEINDRUCK' | translate }}">
+                            </single-tree-select>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" ng-model="selectedRole.DominantesAlter" class="form-control" placeholder="{{ 'ALTER' | translate }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="Alterseindruecke" class="col-sm-3 control-label">{{ 'ALTERSEINDRUECKE' | translate }}</label>
+
+                        <div class="col-sm-9">
+                            <div class=" well well-sm">
+                                <ul id="Alterseindruecke" class="list-inline">
+                                    <li ng-repeat="a in selectedRole.RolleAlterseindruecke | unique:'a'">{{ a }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid, 'has-error': !roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'DOMINANTECHARAKTEREIGENSCHAFTEN' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid,
+                                                'label-danger': !roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid,
+                                                    'glyphicon-warning-sign': !roleValidator.validationConstraints['selectedRole.DominanteCharaktereigenschaften'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <tree-select
+                                id="DominanteCharaktereigenschaften"
+                                tree-model="selectables.typus"
+                                selection="selectedRole.DominanteCharaktereigenschaften"
+                                btn-div-class="col-sm-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.typus"
+                                placeholder="{{ 'DOMINANTECHARAKTEREIGENSCHAFTEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Charaktereigenschaften" class="col-sm-3 control-label">{{ 'CHARAKTEREIGENSCHAFTEN' | translate }}</label>
+
+                        <div class="col-sm-9">
+                            <div class=" well well-sm">
+                                <ul id="Charaktereigenschaften" class="list-inline">
+                                    <li ng-repeat="c in selectedRole.RolleCharaktereigenschaften | unique:'c'">{{ c }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group"  ng-class="{'has-success': roleValidator.validationConstraints['selectedRole.Familienstaende'].valid, 'has-error': !roleValidator.validationConstraints['selectedRole.Familienstaende'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'FAMILIENSTAND' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': roleValidator.validationConstraints['selectedRole.Familienstaende'].valid,
+                                                'label-danger': !roleValidator.validationConstraints['selectedRole.Familienstaende'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': roleValidator.validationConstraints['selectedRole.Familienstaende'].valid,
+                                                    'glyphicon-warning-sign': !roleValidator.validationConstraints['selectedRole.Familienstaende'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-sm-9">
+                            <ui-select multiple ng-model="$parent.selectedRole.Familienstaende"
+                                       theme="bootstrap"
+                                       reset-search-input="true">
+                                <ui-select-match placeholder="{{ 'FAMILIENSTAND' | translate }}">{{ $item }}</ui-select-match>
+                                <ui-select-choices repeat="item in $parent.selectables.flattenLists.familienstaende | filter: $select.search">
+                                    <div ng-bind-html="item | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid, 'has-error': !roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'ROLLENRELEVANZ' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid,
+                                                'label-danger': !roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid,
+                                                    'glyphicon-warning-sign': !roleValidator.validationConstraints['selectedRole.Rollenrelevanz'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <div class="col-sm-9">
+                            <ui-select ng-model="$parent.selectedRole.Rollenrelevanz"
+                                       theme="bootstrap"
+                                       reset-search-input="true">
+                                <ui-select-match placeholder="{{ 'ROLLENRELEVANZ' | translate }}">{{ $select.selected }}</ui-select-match>
+                                <ui-select-choices repeat="item in $parent.selectables.flattenLists.rollenrelevanz | filter: $select.search">
+                                    <div ng-bind-html="item | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 text-right">
+                            <label class="control-label">{{ 'STEREOTYP' | translate }}</label>
+                        </div>
+                        <tree-select
+                                id="Stereotypen"
+                                tree-model="selectables.stereotypen"
+                                selection="selectedRole.Stereotypen"
+                                btn-div-class="col-sm-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.stereotypen"
+                                placeholder="{{ 'STEREOTYP' | translate }}">
+                        </tree-select>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button ng-disabled="!roleValidator.validationResult.valid" ng-if="selectedRole.RollenID === 'new'" onclick="$('#myRoleDetailModal').modal('hide');" type="button" class="btn btn-primary"
+                        ng-click="createRole()"> {{ 'ANLEGEN' | translate }}
+                </button>
+                <button ng-disabled="!roleValidator.validationResult.valid" ng-if="selectedRole.RollenID !== 'new'" onclick="$('#myRoleDetailModal').modal('hide');" type="button" class="btn btn-primary"
+                        ng-click="updateSelectedRole()"> {{ 'AENDERN' | translate }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ABBRECHEN' | translate }}</button>
+            </div>
+        </div>
+
+
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog  -->
+</div><!-- /.modal -->

@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="myCostumeDetailModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog bigger-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 ng-if="selectedCostume.CostumeID === 'new'" class="modal-title" id="myModalLabel"><b>{{ 'KOSTUEMANLEGEN' | translate }}: {{selectedCostume.Kostuemkurztext}}</b></h3>
+
+                <h3 ng-if="selectedCostume.CostumeID !== 'new'" class="modal-title" id="myModalLabel"><b>{{ 'KOSTUEM' | translate }}:
+                    {{selectedCostume.Kostuemkurztext}}</b></h3>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <ng-include src="'templates/costumedata.html'"></ng-include>
+                    <!--
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{ 'BILDER' | translate }} <span class="badge">{{ newscreenshots.length }}</span></h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    Hier kommt der Bilderupload hin.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-disabled="!costumeValidator.validationResult.valid" ng-if="selectedCostume.KostuemID === 'new'" onclick="$('#myCostumeDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="createCostume(selectedCostume)"> {{ 'ANLEGEN' | translate }}
+                </button>
+                <button ng-disabled="!costumeValidator.validationResult.valid" ng-if="selectedCostume.KostuemID !== 'new'" onclick="$('#myCostumeDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="updateCostume(selectedCostume)"> {{ 'AENDERN' | translate }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ABBRECHEN' | translate }}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog  -->
+</div><!-- /.modal -->

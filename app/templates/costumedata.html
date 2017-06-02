@@ -1,0 +1,335 @@
+<div  class="alert-inline bg-warning" ng-show="unsavedData">
+    <span class="glyphicon glyphicon glyphicon-warning-sign"></span> <span>{{ 'UNSAVED_DATA' | translate }}</span>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right">
+        <label for="Kostuemkurztext" class="control-label">{{ 'KURZTEXT' | translate }}</label>
+    </div>
+    <div class="col-sm-9">
+        <input type="text" ng-model="selectedCostume.Kostuemkurztext" class="form-control"
+               id="Kostuemkurztext"
+               typeahead="kt.Kostuemkurztext for kt in selectables.kostuemkurztexte | filter:$viewValue | limitTo: 8"
+               placeholder="{{ 'KOSTUEMKURZTEXT' | translate }}">
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-3 text-right">
+        <label for="Szenenbeschreibung" class="control-label">{{ 'SZENENBESCHREIBUNG' | translate }}</label>
+    </div>
+    <div class="col-sm-9">
+        <textarea ng-model="selectedCostume.Szenenbeschreibung" class="form-control" rows="4"
+                  id="Szenenbeschreibung"
+                  placeholder="{{ 'SZENENBESCHREIBUNG' | translate }}"></textarea>
+    </div>
+</div>
+<div class="panel" ng-class="{'panel-danger': !costumeValidator.validationConstraints['selectedCostume.KostuemTimecodes'].valid, 'panel-success': costumeValidator.validationConstraints['selectedCostume.KostuemTimecodes'].valid}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'ZEITSTEMPEL' | translate }} <span class="badge">{{ selectedCostume.KostuemTimecodes.length }}</span> <span class="glyphicon" ng-class="{'glyphicon-ok': costumeValidator.validationConstraints['selectedCostume.KostuemTimecodes'].valid, 'glyphicon-warning-sign': !costumeValidator.validationConstraints['selectedCostume.KostuemTimecodes'].valid}"></span></h3>
+    </div>
+    <table>
+        <tr>
+            <td style="width: 15%">
+                <label for="TimecodeAnfang" class="col-sm-4 control-label">{{ 'ZEITSTEMPELANFANG' | translate }}
+                    (hh:mm:ss)</label>
+            </td>
+            <td style="width: 30%">
+                <div id="TimecodeAnfang" ng-model="currentTimecodeAnfang"
+                     style="display:inline-block;">
+                    <my-timepicker time-code-model="currentTimecodeAnfang" hour-step="hstep"
+                                   minute-step="mstep" second-step="sstep"
+                                   show-meridian="ismeridian"></my-timepicker>
+                </div>
+            </td>
+            <td style="width: 15%">
+                <label for="TimecodeEnde" class="col-sm-4 control-label">{{ 'ZEITSTEMPELENDE' | translate }}
+                    (hh:mm:ss)</label>
+            </td>
+            <td style="width: 30%">
+                <div id="TimecodeEnde" ng-model="currentTimecodeEnde"
+                     style="display:inline-block;">
+                    <my-timepicker time-code-model="currentTimecodeEnde" hour-step="hstep"
+                                   minute-step="mstep" second-step="sstep"
+                                   show-meridian="ismeridian"></my-timepicker>
+                </div>
+            </td>
+            <td style="width: 10%">
+                <button ng-click="addTimecode(currentTimecodeAnfang, currentTimecodeEnde)"
+                        class="btn btn-primary btn-s"><span
+                        class="glyphicon glyphicon glyphicon-plus"></span></button>
+            </td>
+        </tr>
+    </table>
+    <table id="Timecodes" ng-hide="selectedCostume.KostuemTimecodes.length === 0" class="table table-hover">
+        <thead>
+        <tr>
+            <th style="width: 40%">{{ 'ZEITSTEMPELANFANG' | translate }} (hh:mm:ss)</th>
+            <th style="width: 40%">{{ 'ZEITSTEMPELENDE' | translate }} (hh:mm:ss)</th>
+            <th style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="timecode in selectedCostume.KostuemTimecodes">
+            <td>{{getTimecodeString(timecode.Timecodeanfang)}}</td>
+            <td>{{getTimecodeString(timecode.Timecodeende)}}</td>
+            <td>
+                <!-- Delete Timecode-->
+                <button ng-click="deleteTimecode(timecode)" class="btn btn-danger btn-xs pull-right"
+                        tooltip-html-unsafe="{{ 'ZEITSTEMPELLOESCHEN' | translate }}"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="form-group" ng-class="{'has-success': costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid, 'has-error': !costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid}">
+    <div class="col-sm-3 text-right">
+        <label class="control-label">{{ 'ORTSBEGEBENHEIT' | translate }}</label>
+        <span class="label"
+              ng-class="{   'label-success': costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid,
+                            'label-danger': !costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid}">
+            <span class="glyphicon"
+                  ng-class="{   'glyphicon-ok': costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid,
+                                'glyphicon-warning-sign': !costumeValidator.validationConstraints['selectedCostume.Ortsbegebenheit'].valid}">
+            </span>
+        </span>
+    </div>
+    <div class="col-sm-2">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.Ortsbegebenheit" name="Ortsbegebenheit"
+                       id="OrtsbegebenheitDrinnen"
+                       value="drinnen">
+                {{ 'ORTSBEGEBENHEITDRINNEN' | translate }}
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.Ortsbegebenheit" name="Ortsbegebenheit"
+                       id="OrtsbegebenheitDraussen"
+                       value="drau&szlig;en">
+                {{ 'ORTSBEGEBENHEITDRAUSSEN' | translate }}
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.Ortsbegebenheit" name="Ortsbegebenheit"
+                       id="OrtsbegebenheitDrinnenUndDraussen"
+                       value="drinnen und drau&szlig;en">
+                {{ 'ORTSBEGEBENHEITDRINNENUNDDRAUSSEN' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-class="{'has-success': costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid, 'has-error': !costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid}">
+    <div class="col-sm-3 text-right">
+        <label class="control-label">{{ 'STEREOTYPRELEVANT' | translate }}</label>
+        <span class="label"
+              ng-class="{   'label-success': costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid,
+                            'label-danger': !costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid}">
+            <span class="glyphicon"
+                  ng-class="{   'glyphicon-ok': costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid,
+                                'glyphicon-warning-sign': !costumeValidator.validationConstraints['selectedCostume.StereotypRelevant'].valid}">
+            </span>
+        </span>
+    </div>
+    <div class="col-sm-2">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.StereotypRelevant"
+                       name="StereotypRelevant"
+                       id="StereotypRelevantJa"
+                       value="ja">
+                {{ 'STEREOTYPRELEVANTJA' | translate }}
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.StereotypRelevant"
+                       name="StereotypRelevant"
+                       id="StereotypRelevantNein"
+                       value="nein">
+                {{ 'STEREOTYPRELEVANTNEIN' | translate }}
+            </label>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="radio">
+            <label>
+                <input type="radio" ng-model="selectedCostume.StereotypRelevant"
+                       name="StereotypRelevant"
+                       id="StereotypRelevantNeutral"
+                       value="neutral">
+                {{ 'STEREOTYPRELEVANTNEUTRAL' | translate }}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{ 'DOMINANTEFARBE' | translate }}</label>
+    <single-tree-select
+            id="DominanteFarbe"
+            tree-model="selectables.farben"
+            selection="selectedCostume.DominanteFarbe"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.farben"
+            validation="validation"
+            placeholder="{{ 'DOMINANTEFARBE' | translate }}">
+    </single-tree-select>
+</div>
+<div class="form-group">
+    <label for="Farben" class="col-sm-3 control-label">{{ 'FARBENVONBASISELEMENTEN' | translate }}</label>
+
+    <div class="col-sm-9">
+        <div class=" well well-sm">
+            <ul id="Farben" class="list-inline">
+                <li ng-repeat="f in selectedCostume.KostuemFarben | unique:'f'">{{ f }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{ 'DOMINANTEFUNKTION' | translate }}</label>
+    <single-tree-select
+            id="DominanteFunktion"
+            tree-model="selectables.funktionen"
+            selection="selectedCostume.DominanteFunktion"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.funktionen"
+            validation="validation"
+            placeholder="{{ 'DOMINANTEFUNKTION' | translate }}">
+    </single-tree-select>
+</div>
+<div class="form-group">
+    <label for="Funktionen" class="col-sm-3 control-label">{{ 'FUNKTIONENVONBASISELEMENTEN' | translate }}</label>
+
+    <div class="col-sm-9">
+        <div class=" well well-sm">
+            <ul id="Funktionen" class="list-inline">
+                <li ng-repeat="f in selectedCostume.KostuemFunktionen | unique:'f'">{{ f }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-3 control-label">{{ 'DOMINANTERZUSTAND' | translate }}</label>
+    <single-tree-select
+            id="DominanterZustand"
+            tree-model="selectables.zustaende"
+            selection="selectedCostume.DominanterZustand"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.zustaende"
+            validation="validation"
+            placeholder="{{ 'DOMINANTERZUSTAND' | translate }}">
+    </single-tree-select>
+</div>
+<div class="form-group">
+    <label for="Zustaende" class="col-sm-3 control-label">{{ 'ZUSTAENDEVONBASISELEMENTEN' | translate }}</label>
+
+    <div class="col-sm-9">
+        <div class=" well well-sm">
+            <ul id="Zustaende" class="list-inline">
+                <li ng-repeat="z in selectedCostume.KostuemZustaende | unique:'z'">{{ z }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="form-group" ng-class="{'has-success': costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid, 'has-error': !costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid}">
+    <div class="col-md-3">
+        <label class="control-label">{{ 'CHARAKTEREIGENSCHAFTEN' | translate }}</label>
+        <span class="label"
+              ng-class="{   'label-success': costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid,
+                            'label-danger': !costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid}">
+            <span class="glyphicon"
+                  ng-class="{   'glyphicon-ok': costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid,
+                                'glyphicon-warning-sign': !costumeValidator.validationConstraints['selectedCostume.KostuemCharaktereigenschaften'].valid}">
+            </span>
+        </span>
+    </div>
+    <tree-select
+            id="Charaktereigenschaften"
+            tree-model="selectables.charaktereigenschaften"
+            selection="selectedCostume.KostuemCharaktereigenschaften"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.charaktereigenschaften"
+            placeholder="{{ 'CHARAKTEREIGENSCHAFTEN' | translate }}">
+    </tree-select>
+</div>
+<div class="form-group">
+    <div class="col-md-3 text-right">
+        <label class="control-label">{{ 'KOERPERMODIFIKATIONEN' | translate }}</label>
+    </div>
+    <tree-select
+            id="Koerpermodifikationen"
+            tree-model="selectables.koerpermodifikationen"
+            selection="selectedCostume.KostuemKoerpermodifikationen"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.koerpermodifikationen"
+            placeholder="{{ 'KOERPERMODIFIKATIONEN' | translate }}">
+    </tree-select>
+</div>
+<spielort-picker
+        tree-model = "selectables.spielorte"
+        tree-model-detail="selectables.spielortdetails"
+        selectable-spielorte = "selectables.flattenLists.spielorte"
+        selectable-spielort-freitexte= "selectables.flattenLists.spielortdetails"
+        selection = "selectedCostume.KostuemSpielorte"
+        costume-id = "selectedCostume.KostuemID"
+        role-id = "selectedCostume.RollenID"
+        film-id = "selectedCostume.FilmID"
+        validation="costumeValidator.validationConstraints['selectedCostume.KostuemSpielorte'].valid"
+        showvalidation>
+</spielort-picker>
+<alters-picker
+        tree-model = "selectables.alterseindruecke"
+        selectable-alterseindruecke = "selectables.flattenLists.alterseindruecke"
+        selection = "selectedCostume.KostuemAlterseindruecke"
+        costume-id = "selectedCostume.KostuemID"
+        role-id = "selectedCostume.RollenID"
+        film-id = "selectedCostume.FilmID"
+        validation="costumeValidator.validationConstraints['selectedCostume.KostuemAlterseindruecke'].valid"
+        showvalidation>
+</alters-picker>
+<spielzeit-picker
+        tree-model = "selectables.spielzeiten"
+        selectable-spielzeiten = "selectables.flattenLists.spielzeiten"
+        selection = "selectedCostume.KostuemSpielzeiten"
+        costume-id = "selectedCostume.KostuemID"
+        role-id = "selectedCostume.RollenID"
+        film-id = "selectedCostume.FilmID">
+</spielzeit-picker>
+<div class="form-group" ng-class="{'has-success': costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid, 'has-error': !costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid}">
+    <div class="col-sm-3 text-right">
+        <label class="control-label">{{ 'TAGESZEITEN' | translate }}</label>
+        <span class="label"
+              ng-class="{   'label-success': costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid,
+                            'label-danger': !costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid}">
+            <span class="glyphicon"
+                  ng-class="{   'glyphicon-ok': costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid,
+                                'glyphicon-warning-sign': !costumeValidator.validationConstraints['selectedCostume.KostuemTageszeiten'].valid}">
+            </span>
+        </span>
+    </div>
+    <tree-select
+            id="Tageszeiten"
+            tree-model="selectables.tageszeiten"
+            selection="selectedCostume.KostuemTageszeiten"
+            btn-div-class="col-sm-1"
+            select-div-class="col-sm-8"
+            prepared-flatten-list="selectables.flattenLists.tageszeiten"
+            placeholder="{{ 'TAGESZEITEN' | translate }}">
+    </tree-select>
+</div>
+<div  class="alert-inline bg-warning" ng-show="unsavedData">
+    <span class="glyphicon glyphicon glyphicon-warning-sign"></span> <span>{{ 'UNSAVED_DATA' | translate }}</span>
+</div>

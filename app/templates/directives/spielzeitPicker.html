@@ -1,0 +1,67 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'SPIELZEITEN' | translate }} <span class="badge">{{ selection.length }}</span></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label class="control-label pull-right">{{ 'SPIELZEIT' | translate }}</label>
+                </div>
+                <single-tree-select
+                        id="Spielzeit"
+                        tree-model="treeModel"
+                        selection="tempSpielzeit"
+                        btn-div-class="col-xs-1"
+                        select-div-class="col-xs-2"
+                        prepared-flatten-list="selectableSpielzeiten"
+                        placeholder="{{ 'SPIELZEIT' | translate }}">
+                </single-tree-select>
+                <div class="col-xs-1">
+                    <label for="SpielzeitVon" class="control-label">{{ 'SPIELZEITVON' | translate }}</label>
+                </div>
+                <div class="col-sm-2">
+                    <input type="text" ng-model="tempSpielzeitVon" class="form-control"
+                           id="Spielzeitvon"
+                           placeholder="von">
+                </div>
+                <div class="col-xs-1">
+                    <label for="SpielzeitBis" class="control-label">{{ 'SPIELZEITBIS' | translate }}</label>
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" ng-model="tempSpielzeitBis" class="form-control"
+                           id="Spielzeitbis"
+                           placeholder="bis">
+                </div>
+                <div class="col-xs-1 pull-right">
+                    <button ng-click="addSpielzeitToCostume(tempSpielzeit, tempSpielzeitVon, tempSpielzeitBis)"
+                            class="btn btn-primary btn-xs"><span
+                            class="glyphicon glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="Spielzeiten" ng-hide="selection.length === 0" class="table table-hover">
+        <thead>
+        <tr>
+            <th style="width: 50%">{{ 'SPIELZEIT' | translate }}</th>
+            <th style="width: 20%">{{ 'SPIELZEITVON' | translate }}</th>
+            <th style="width: 20%">{{ 'SPIELZEITBIS' | translate }}</th>
+            <th style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="s in selection | orderBy:'Spielzeit'">
+            <td>{{s.Spielzeit}}</td>
+            <td>{{s.SpielzeitVon}}</td>
+            <td>{{s.SpielzeitBis}}</td>
+            <td>
+                <!-- Delete Spielzeit-->
+                <button ng-click="deleteSpielzeitFromCostume(s)" class="btn btn-danger btn-xs pull-right"
+                        tooltip-html-unsafe="{{ 'SPIELZEITLOESCHEN' | translate }}"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

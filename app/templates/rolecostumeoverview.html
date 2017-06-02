@@ -1,0 +1,102 @@
+<div ng-controller="RoleCostumeCtrl">
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <h1>{{ 'KOSTUEMUEBERSICHTVON' | translate }} {{role.Rollenvorname}} {{role.Rollennachname}} <small> {{film.Filmtitel}} ({{film.Originaltitel}})</small></h1>
+        </div>
+        <div class="row">
+            <!-- Breadcrumb für Navigation zu Filmen und Rollen -->
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">Filme</a></li>
+                    <li>{{ 'BREADCRUMBFILM' | translate }}: <a href="#/filme/{{film.FilmID}}">{{film.Filmtitel}}</a></li>
+                    <li>{{ 'BREADCRUMBROLLE' | translate }}: <a href="#/filme/{{film.FilmID}}/rollen/{{role.RollenID}}/kostueme">{{role.Rollenvorname}} {{role.Rollennachname}}</a></li>
+                    <li>{{ 'BREADCRUMBKOSTUEMUEBERSICHT' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <image-viewer screenshot-service-name="RollenScreenshots" thumb-service-name="RollenScreenshotThumbs" query-Params="{filmId: routeParams.filmId, rollenId: routeParams.rollenId}"></image-viewer>
+            </div>
+            <!--
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Rolle {{role.Rollenvorname}} {{role.Rollennachname}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Film:</label>
+                                <div class="col-md-10">
+                                    <input type="text" disabled class="form-control" id="Filmtitel" value="{{film.Filmtitel}} (Originaltitel: {{film.Originaltitel}})">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Regiseur:</label>
+                                <div class="col-md-10">
+                                    <input type="text" disabled class="form-control" id="Filmtitel" value="{{film.Regiseurvorname}} {{film.Regiseurnachname}}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            -->
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'KOSTUEME' | translate }} <span class="badge">{{ costumes.length }}</span></h3>
+                    </div>
+                    <div class="row">
+                        <div class="panel-body">
+                            <div class="col-md-3">
+                                <button data-toggle="modal" data-target="#myCostumeDetailModal" ng-click="showCreateCostumeModal()" class="btn btn-primary">{{ 'NEUESKOSTUEMANLEGEN' | translate }}</button>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="searchText">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Kostümliste -->
+                    <table class="table table-hover" ng-hide="costumes.length === 0">
+                        <thead>
+                        <tr>
+                            <th style="width: 3%">#</th>
+                            <th style="width: 88%">{{ 'BEZEICHNUNG' | translate }}</th>
+                            <th style="width: 3%"></th>
+                            <th style="width: 3%"></th>
+                            <th style="width: 3%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="costume in costumes | filter:searchText">
+                            <td>{{$index+1}}</td>
+                            <td>{{costume.Kostuemkurztext}}</td>
+                            <td>
+                                <!-- Details of costume -->
+                                <button data-toggle="modal" data-target="#myCostumeDetailModal" ng-click="showCostumeDetailsModal(costume)" class="btn btn-info btn-xs pull-right" tooltip-html-unsafe="{{ 'DETAILSZUKOSTUEM' | translate:{kurztext: costume.Kostuemkurztext} }}"><span class="glyphicon glyphicon-info-sign"></span> </button>
+                            </td><td>
+                            <!-- Composite structure of costume -->
+                            <a href="#/filme/{{film.FilmID}}/rollen/{{role.RollenID}}/kostueme/{{costume.KostuemID}}" class="btn btn-info btn-xs pull-right" tooltip-html-unsafe="{{ 'KOMPOSITIONZEIGEN' | translate:{kurztext: costume.Kostuemkurztext} }}"><span class="glyphicon glyphicon-camera"></span> </a>
+                        </td>
+                            <td>
+                                <!-- Delete costume -->
+                                <button data-toggle="modal" data-target="#myCostumeDeleteModal" ng-click="showCostumeDeleteModal(costume)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'KOSTUEMLOESCHEN' | translate:{kurztext: costume.Kostuemkurztext} }}"><span class="glyphicon glyphicon-remove"></span> </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <ng-include src="'templates/modal/costumedetails.html'"></ng-include>
+    <ng-include src="'templates/modal/costumedelete.html'"></ng-include>
+</div>

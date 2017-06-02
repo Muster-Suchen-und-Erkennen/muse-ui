@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'BILDER' | translate }} <span class="badge">{{ screenshots.length }}</span></h3>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div ng-if="screenshots.length > 0">
+                        <button class="btn btn-default" ng-disabled="screenshotIndex === 0" ng-click="prevScreenshot()">{{ 'BILDERPREV' | translate }}</button> ({{ screenshotIndex + 1 }} | {{ screenshots.length  }}) <button class="btn btn-default" ng-disabled="(screenshotIndex === (screenshots.length - 1)) || (screenshots.length === 0)" ng-click="nextScreenshot()">{{ 'BILDERNEXT' | translate }}</button>
+                        <button class="btn btn-default" ng-disabled="screenshots.length === 0" ng-click="openImageViewer()"><span class="glyphicon glyphicon-fullscreen"></span></button>
+                        <button class="btn btn-danger pull-right" ng-disabled="screenshots.length === 0" ng-click="deleteSelectedScreenshot()"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <img ng-if="screenshots[screenshotIndex]" ng-src="{{ screenshots[screenshotIndex].ScreenshotThumb }}" class="museimage" >
+                    <p ng-if="(screenshots.length === 0) && (loadingScreenshots===false)" class="col-md-12">{{ 'KEINEBILDERVORHANDEN' | translate }}</p>
+                    <p ng-if="loadingScreenshots" class="col-md-12">{{ 'BILDERWERDENGELADEN' | translate }}</p>
+                </div>
+            </div>
+            <div ng-if="max > 0" class="form-group">
+                <progressbar class="col-md-12" max="max" value="uploadProgress"><span style="color:black; white-space:nowrap;">{{uploadProgress}} / {{max}}</span></progressbar>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <input class="col-md-8" type="file" name="fileInput" ng-file-select="onFileSelect($files)">
+                    <button class="btn btn-default pull-right" ng-disabled="!uploading" ng-click="upload.abort()">{{ 'ABBRECHEN' | translate }}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--<ng-include src="'templates/modal/imageviewer.html'"></ng-include>-->
+</div>

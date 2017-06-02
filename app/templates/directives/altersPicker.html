@@ -1,0 +1,58 @@
+<div class="panel" ng-class="{'panel-danger': !validation, 'panel-success': validation}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'ALTERSEINDRUECKE' | translate }} <span class="badge">{{ selection.length }}</span> <span ng-if="validation && showvalidation" class="glyphicon glyphicon-ok"></span><span ng-if="!validation && showvalidation" class="glyphicon glyphicon-warning-sign"></span></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label class="control-label pull-right">{{ 'ALTERSEINDRUCK' | translate }}</label>
+                </div>
+                <single-tree-select
+                        id="Spielort"
+                        tree-model="treeModel"
+                        selection="tempAlterseindruck"
+                        btn-div-class="col-xs-1"
+                        select-div-class="col-xs-3"
+                        prepared-flatten-list="selectableAlterseindruecke"
+                        placeholder="{{ 'ALTERSEINDRUCK' | translate }}">
+                </single-tree-select>
+                <div class="col-xs-2">
+                    <label for="Alter" class="control-label">{{ 'ALTER' | translate }}</label>
+                </div>
+
+                <div class="col-xs-2">
+                    <input type="text" ng-model="tempAlter" class="form-control"
+                           id="Alter"
+                           placeholder="{{ 'ALTER' | translate }}">
+                </div>
+                <div class="col-xs-1 pull-right">
+                    <button ng-click="addAlterseindruckToCostume(tempAlterseindruck, tempAlter)"
+                            class="btn btn-primary btn-xs"><span
+                            class="glyphicon glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="tblAlterseindruck" ng-hide="selection.length === 0" class="table table-hover">
+        <thead>
+        <tr>
+            <th style="width: 40%">{{ 'ALTERSEINDRUCK' | translate }}</th>
+            <th style="width: 40%">{{ 'ALTER' | translate }}</th>
+            <th style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="a in selection | orderBy:'Alterseindruck'">
+            <td>{{a.Alterseindruck}}</td>
+            <td>{{a.NumAlter}}</td>
+            <td>
+                <!-- Delete Alterseindruck-->
+                <button ng-click="deleteAlterseindruckFromCostume(a)" class="btn btn-danger btn-xs pull-right"
+                        tooltip-html-unsafe="{{ 'ALTERSEINDRUCKLOESCHEN' | translate }}"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

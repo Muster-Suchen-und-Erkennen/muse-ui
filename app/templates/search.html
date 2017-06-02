@@ -1,0 +1,89 @@
+<div ng-controller="SearchCtrl">
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <h1 translate>SUCHEN</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>KOSTUEMSUCHEN</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form class="navbar-form" role="searchCostume">
+                            <div class="form-group">
+                                <input type="number" string-to-number ng-model="filmIDInput"  class="form-control" placeholder="FilmID">
+                                <input type="number" string-to-number ng-model="rollenIDInput" class="form-control" placeholder="RollenID">
+                                <input type="number" string-to-number ng-model="kostuemIDInput" class="form-control" placeholder="KostuemID">
+                            </div>
+                            <button  ng-click="navigateToCostume()"  class="btn btn-default" translate>SUCHEN</button>
+                        </form>
+                        <div ng-show= "notAvailable" class="alert alert-danger" role="alert" translate>KOSTUEMSUCHEFEHLER</div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>BASISELEMENTSUCHEN</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="navbar-form" role="searchBaseElement">
+                            <div class="form-group">
+                                <input type="number" string-to-number ng-model="basiselementIDInput" class="form-control" placeholder="BasiselementID">
+                            </div>
+                            <button  ng-click='navigateToCostumeThroughBE()'  class="btn btn-default" translate>SUCHEN</button>
+                        </form>
+                        <div ng-show= "notAvailable2" class="alert alert-danger" role="alert" translate>BESUCHEFEHLER</div>
+                    </div>
+                </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title" translate>LEERERELATIONENSUCHEN</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="navbar-form" role="searchBaseElement">
+                                <button  ng-click='searchRelations()'  class="btn btn-default" translate>SUCHEN</button>
+                            </form>
+                        <ul>
+                            <li ng-repeat="be in emptyRelations.relations" > {{be.BE}}
+                            </li>
+                        </ul>
+                        </div>
+
+                    <!--
+href="#/filme/{{filmIDInput}}/rollen/{{rollenIDInput}}/kostueme/{{kostuemIDInput}}"
+
+                    onclick="$('#mySearchDialogModal').modal('hide')"
+                                        </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title" translate>TEILELEMENTSUCHEN</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <form class="navbar-form">
+                                                <div class="form-group">
+                                                    <input type="number" string-to-number ng-model="teilelementIDInput" class="form-control"
+                                                           placeholder="TeilelementID">
+                                                </div>
+                                                <a href="#/filme/{{filmIDInput}}/rollen/{{rollenIDInput}}/kostueme/{{kostuemIDInput}}"
+                                                   class="btn btn-default" translate>SUCHEN </a>
+
+                                            </form>
+                                        </div>
+                                        </div>-->
+
+                </div>
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+</div>

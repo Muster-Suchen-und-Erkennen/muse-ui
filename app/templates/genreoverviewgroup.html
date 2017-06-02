@@ -1,0 +1,26 @@
+<header id={{genre.label}} ng-show="(genre.films | filter:searchText).length > 0" class="h3">
+    {{genre.label}}
+    <span class="badge" style="vertical-align:middle;">
+        {{ (genre.films | filter:searchText).length }}
+    </span>
+</header>
+<div ng-show="(genre.films | filter:searchText).length > 0" class="panel panel-default">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th style="width: 31%" translate>FILMTITEL</th>
+                <th style="width: 31%" translate>ORIGINALTITEL</th>
+                <th style="width: 31%" translate>GENRES</th>
+                <th style="width: 7%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="film in genre.films | filter:searchText">
+                <td><a href="#/filme/{{film.FilmID}}">{{film.Filmtitel}}</a></td>
+                <td><a href="#/filme/{{film.FilmID}}">{{film.Originaltitel}}</a></td>
+                <td><ul class="taglist"><li ng-repeat="genre in film.Genres | orderBy"><a href="" ng-click="gotoAnchor(genre)">{{genre}}</a></li></ul>
+                <td><a href="#/filme/{{film.FilmID}}" class="btn btn-info btn-xs pull-right" tooltip-html-unsafe="{{  'DETAILSZUFILM' | translate:{filmtitle: film.Filmtitel}  }}"><span class="glyphicon glyphicon-info-sign"></span> </a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,66 @@
+<div class="panel" ng-class="{'panel-danger': !validation, 'panel-success': validation}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'SPIELORTE' | translate }} <span class="badge">{{ selection.length }}</span> <span ng-if="validation && showvalidation" class="glyphicon glyphicon-ok"></span><span ng-if="!validation && showvalidation" class="glyphicon glyphicon-warning-sign"></span></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label class="control-label pull-right">{{ 'SPIELORT' | translate }}</label>
+                </div>
+                <single-tree-select
+                        id="Spielort"
+                        tree-model="treeModel"
+                        selection="tempSpielort"
+                        btn-div-class="col-xs-1"
+                        select-div-class="col-xs-3"
+                        prepared-flatten-list="selectableSpielorte"
+                        placeholder="{{ 'SPIELORT' | translate }}"
+                        default-value="Vereinigte Staaten">
+
+                </single-tree-select>
+                <div class="col-xs-1 pull-left">
+                    <label class="control-label">{{ 'SPIELORTFREITEXT' | translate }}</label>
+                </div>
+                <single-tree-select
+                        id="Spielortfreitext"
+                        tree-model="treeModelDetail"
+                        selection="tempSpielortfreitext"
+                        btn-div-class="col-xs-1"
+                        select-div-class="col-xs-3"
+                        prepared-flatten-list="selectableSpielortFreitexte"
+                        placeholder="{{ 'SPIELORTFREITEXT' | translate }}"
+                      >
+
+                </single-tree-select>
+
+                <div class="col-xs-1 pull-right">
+                    <button ng-click="addSpielortToCostume(tempSpielort, tempSpielortfreitext)"
+                            class="btn btn-primary btn-xs">
+                        <span class="glyphicon glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table ng-hide="selection.length === 0" id="Spielorte" class="table table-hover">
+        <thead>
+            <tr>
+                <th style="width: 40%">{{ 'SPIELORT' | translate }}</th>
+                <th style="width: 40%">{{ 'SPIELORTFREITEXT' | translate }}</th>
+                <th style="width: 10%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="s in selection | orderBy:'Spielort'">
+                <td>{{s.Spielort}}</td>
+                <td>{{s.SpielortDetail}}</td>
+                <td>
+                    <!-- Delete Spielort-->
+                    <button ng-click="deleteSpielortFromCostume(s)" class="btn btn-danger btn-xs pull-right"
+                            tooltip-html-unsafe="Spielort löschen!"><span
+                            class="glyphicon glyphicon-remove"></span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,16 @@
+.idea
+.vscode
+.tmp/
+app/bower_components/
+dist/
+node_modules/
+
+jsconfig.json
+
+dist_dev
+dist_prod
+dist_vm
+
+ssl/rootCA.key
+ssl/rootCA.pem
+ssl/rootCA.srl

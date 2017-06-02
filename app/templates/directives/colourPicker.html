@@ -1,0 +1,62 @@
+<div class="panel"  ng-class="{'panel-danger': !validation, 'panel-success': validation}">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'FARBEN' | translate }} <span class="badge">{{ selection.length }}</span> <span class="glyphicon" ng-class="{'glyphicon-ok': validation, 'glyphicon-warning-sign': !validation}"></span></h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-2">
+                    <label class="control-label pull-right">{{ 'FARBE' | translate }}</label>
+                </div>
+                <single-tree-select
+                        id="Farbe"
+                        tree-model="treeModel"
+                        selection="tempColour"
+                        btn-div-class="col-xs-1"
+                        select-div-class="col-xs-3"
+                        prepared-flatten-list="selectableDominantefarbe"
+                        placeholder="{{ 'FARBE' | translate }}">
+                </single-tree-select>
+                <div class="col-xs-2">
+                    <label class="control-label">{{ 'FARBEINDRUCK' | translate }}</label>
+                </div>
+                <div class="col-xs-3">
+                    <ui-select ng-model="$parent.tempColourImpression"
+                               theme="bootstrap"
+                               reset-search-input="true">
+                        <ui-select-match placeholder="{{ 'FARBEINDRUCK' | translate }}">{{ $select.selected.Farbeindruckname }}</ui-select-match>
+                        <ui-select-choices repeat="item.Farbeindruckname as item in selectableFarbeindruecke | filter: {Farbeindruckname: $select.search}">
+                            <div ng-bind-html="item.Farbeindruckname | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-xs-1 pull-right">
+                    <button ng-click="addColourToSelection(tempColour, tempColourImpression)"
+                            class="btn btn-primary btn-xs"><span
+                            class="glyphicon glyphicon glyphicon-plus"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table ng-hide="selection.length === 0" id="Colours" class="table table-hover">
+        <thead>
+        <tr>
+            <th style="width: 40%">{{ 'FARBNAME' | translate }}</th>
+            <th style="width: 40%">{{ 'FARBEINDRUCK' | translate }}</th>
+            <th style="width: 10%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="f in selection | orderBy:'Farbname'">
+            <td>{{f.Farbname}}</td>
+            <td>{{f.Farbeindruck}}</td>
+            <td>
+                <!-- Delete Colour-->
+                <button ng-click="deleteColourFromSelection(f)" class="btn btn-danger btn-xs pull-right"
+                        tooltip-html-unsafe="{{ 'FARBELOESCHEN' | translate }}"><span
+                        class="glyphicon glyphicon-remove"></span></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

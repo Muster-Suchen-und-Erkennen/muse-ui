@@ -1,0 +1,219 @@
+<div ng-controller="CostumeCtrl">
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <h1>{{ 'KOMPOSITIONSUEBERSICHTVON' | translate }} {{costume.Kostuemkurztext}} <small> {{film.Filmtitel}} - {{role.Rollenvorname}} {{role.Rollennachname}} - {{selectedCostume.Kostuemkurztext}}</small></h1>
+        </div>
+        <div class="row">
+            <!-- Breadcrumb für Navigation zu Filmen und Rollen -->
+            <div class="col-md-12">
+                <ul class="breadcrumb">
+                    <li><a href="#">{{ 'BREADCRUMBFILME' | translate }}</a></li>
+                    <li>{{ 'BREADCRUMBFILME' | translate }}: <a href="#/filme/{{film.FilmID}}">{{film.Filmtitel}}</a></li>
+                    <li>{{ 'BREADCRUMBROLLE' | translate }}: <a href="#/filme/{{film.FilmID}}/rollen/{{role.RollenID}}/kostueme">{{role.Rollenvorname}} {{role.Rollennachname}}</a></li>
+                    <li>{{ 'BREADCRUMBKOSTUEM' | translate }}: <a href="#/filme/{{film.FilmID}}/rollen/{{role.RollenID}}/kostueme/{{selectedCostume.KostuemID}}">{{selectedCostume.Kostuemkurztext}}</a></li>
+                    <li>{{ 'BREADCRUMBKOMPOSITIONSUEBERSICHT' | translate }}</li>
+                </ul>
+            </div>
+        </div>
+        <div collapse="isCollapsed" class="row">
+            <div class="col-md-4">
+                <image-viewer screenshot-service-name="KostuemScreenshots" thumb-service-name="KostuemScreenshotThumbs" query-Params="{filmId: routeParams.filmId, rollenId: routeParams.rollenId, kostuemId: routeParams.kostuemId}"></image-viewer>
+            </div>
+            <div class="col-md-8">
+                <!-- Eingabefelder für Kostuemkopfdaten -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'KOSTUEMDATEN' | translate }}</h3>
+                    </div>
+                    <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <ng-include src="'templates/costumedata.html'"></ng-include>
+                        <div class="form-group">
+                            <div class="col-md-offset-3 col-md-2">
+                                <button ng-disabled="!costumeValidator.validationResult.valid" style="width: 100%" class="btn btn-primary"
+                                        ng-click="updateCostume(selectedCostume)">{{ 'AENDERN' | translate }}
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-default" ng-click="reloadPage()">{{ 'ZURUECKSETZEN' | translate }}</button>
+                            </div>
+                        </div>
+                        <div ng-class="{bounceInUp: savedProperly, bounceOutDown: !savedProperly}"
+                             class="form-group animated">
+                            <div class="col-md-12">
+                                <div style="text-align: center" class="alert alert-success center-block">
+                                    {{ 'KOSTUEMERFOLGREICHGESPEICHERT' | translate }}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" class="btn btn-default" ng-model="singleModel" ng-click="isCollapsed = !isCollapsed">{{ 'KOSTUEMDATENEINAUSBLENDEN' | translate }}</button>
+            </div>
+        </div>
+        <!-- Bereich für die Eingabe von Basiselementen/Teilelementen-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'BASISELEMENTE' | translate }} <span class="badge">{{ selectedCostume.KostuemBasiselemente.length }}</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <button data-toggle="modal" data-target="#myBasiselementDetailModal" ng-click="showCreateBasiselementModal()" class="btn btn-primary">{{ 'NEUESBASISELEMENTANLEGEN' | translate }} <span
+                                        class="glyphicon glyphicon glyphicon-plus"></span></button>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="searchText">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                    <input type="checkbox" ng-model="oneAtATime">
+                                    {{ 'NUREINBASISELEMENTOEFFNEN' | translate }}
+
+                            </div>
+                        </div>
+                        <accordion close-others="oneAtATime">
+
+                            <accordion-group ng-repeat="b in selectedCostume.KostuemBasiselemente | filter:searchText | orderBy:'BasiselementID'" is-open="isopen">
+                                <accordion-heading>
+                                    ({{b.BasiselementID}}) {{b.Basiselementname}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
+                                </accordion-heading>
+                                <p>
+                                    <button data-toggle="modal" data-target="#myBasiselementDetailModal" ng-click="showBasiselementDetailsModal(b)" class="btn btn-s btn-info" tooltip-html-unsafe="{{ 'DETAILSZUBASISELEMENT' | translate }} <b>({{b.BasiselementID}}) {{b.Basiselementname}}</b>">{{b.Basiselementname}} <span class="glyphicon glyphicon-info-sign"></span> </button> <button data-toggle="modal" data-target="#myBasiselementDeleteModal" ng-click="showBasiselementDeleteModal(b)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'BASISELEMENTLOESCHEN' | translate }}"><span class="glyphicon glyphicon-remove"></span> </button>
+                                </p>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">{{ 'TEILELEMENTE' | translate }} <span class="badge">{{ b.BasiselementTeilelemente.length }}</span></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <button data-toggle="modal" data-target="#myTeilelementDetailModal" ng-click="showCreateTeilelementModal(b)" class="btn btn-primary">{{ 'NEUESTEILELEMENTANLEGEN' | translate }} <span
+                                                class="glyphicon glyphicon glyphicon-plus"></span></button>
+                                    </div>
+                                    <table id="Teilelemente" class="table table-hover" ng-hide="b.BasiselementTeilelemente.length === 0">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 90%">{{ 'TEILELEMENT' | translate }}</th>
+                                            <th style="width: 10%"></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <tr ng-repeat="t in b.BasiselementTeilelemente | orderBy:'Teilelementname'">
+                                            <td>
+                                                ({{t.TeilelementID}}) {{t.Teilelementname}}
+                                                <button data-toggle="modal" data-target="#myTeilelementDetailModal" ng-click="showTeilelementDetailsModal(b, t)" class="btn btn-s btn-xs btn-info" tooltip-html-unsafe="{{ 'DETAILSZUTEILELEMENT' | translate }} <b>({{t.TeilelementID}}) {{t.Teilelementname}}</b>"> <span class="glyphicon glyphicon-info-sign"></span> </button>
+                                            </td>
+                                            <td>
+                                                <!-- Delete Teilelement-->
+                                                <button data-toggle="modal" data-target="#myTeilelementDeleteModal" ng-click="showTeilelementDeleteModal(b, t)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'TEILELEMENTLOESCHEN' | translate }}"><span class="glyphicon glyphicon-remove"></span> </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </accordion-group>
+                        </accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bereich für Relationen zwischen BEs -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'BASISELEMENTKOMPOSITION' | translate }} <span class="badge">{{ basiselementRelations.length }}</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <label for="Subject" class="col-sm-1 control-label">{{ 'BASISELEMENTKOMPOSITIONSUBJEKT' | translate }}</label>
+
+                        <div id="Subject" class="col-sm-3">
+                            <ui-select ng-model="$parent.tempSubject"
+                                       theme="bootstrap"
+                                       reset-search-input="true">
+                                <ui-select-match placeholder="{{ 'BASISELEMENTE' | translate }}">({{ $select.selected.BasiselementID }}) {{$select.selected.Basiselementname}}</ui-select-match>
+                                <ui-select-choices repeat="item.BasiselementID as item in selectedCostume.KostuemBasiselemente | filter: $select.search">
+                                    <div ng-bind-html="'('+item.BasiselementID + ') ' + item.Basiselementname | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="col-sm-3">
+                            <ui-select ng-model="$parent.tempOperator"
+                                       theme="bootstrap"
+                                       reset-search-input="true">
+                                <ui-select-match placeholder="{{ 'BASISELEMENTKOMPOSITIONOPERATOR' | translate }}">{{ $select.selected.id }}</ui-select-match>
+                                <ui-select-choices repeat="item.id as item in selectables.flattenLists.operatoren | filter: {id: $select.search, label: $select.search}">
+                                    <div ng-bind-html="item.id | highlight: $select.search"></div>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+
+                        <label class="col-sm-1 control-label">{{ 'BASISELEMENTKOMPOSITIONOBJEKT' | translate }}</label>
+
+                        <div class="col-sm-3">
+                            <ui-select ng-model="$parent.tempObject"
+                                       theme="bootstrap"
+                                       reset-search-input="true">
+                                <ui-select-match placeholder="{{ 'BASISELEMENTE' | translate }}">({{ $select.selected.BasiselementID }}) {{$select.selected.Basiselementname}}</ui-select-match>
+                                <ui-select-choices repeat="item.BasiselementID as item in baseelementObjects | orderBy:'BasiselementID' | filter: $select.search">
+                                    <div ng-bind-html="'('+item.BasiselementID + ') ' + item.Basiselementname | highlight: $select.search"></div>
+                                    <small ng-if="item.koerperteil">
+                                        {{'KOERPERTEIL' | translate}}
+                                    </small>
+                                    <small ng-if="!item.koerperteil">
+                                        {{'BASISELEMENT' | translate}}
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <button ng-click="addRelation(tempSubject, tempOperator, tempObject)"
+                                class="btn btn-primary btn-s"><span
+                                class="glyphicon glyphicon glyphicon-plus"></span></button>
+                    </div>
+                    <table id="Relations" ng-hide="basiselementRelations.length === 0" class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 33%">{{ 'BASISELEMENTKOMPOSITIONSUBJEKT' | translate }}</th>
+                            <th style="width: 24%">{{ 'BASISELEMENTKOMPOSITIONOPERATOR' | translate }}</th>
+                            <th style="width: 33%">{{ 'BASISELEMENTKOMPOSITIONOBJEKT' | translate }}</th>
+                            <th style="width: 10%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="r in basiselementRelations | orderBy:'SubjektBasiselement'">
+                            <td>({{r.SubjektBasiselement}}) {{r.SubjectCaption}}</td>
+                            <td>{{r.PraedikatBasiselement}}</td>
+                            <td>({{r.ObjektBasiselement}}) {{r.ObjectCaption}}</td>
+                            <td>
+                                <!-- Delete Relation-->
+                                <button ng-click="deleteRelation(r)" class="btn btn-danger btn-xs pull-right"
+                                        tooltip-html-unsafe="{{ 'RELATIONLOESCHEN' | translate }}"><span
+                                        class="glyphicon glyphicon-remove"></span></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-include src="'templates/modal/basiselementdetails.html'"></ng-include>
+    <ng-include src="'templates/modal/basiselementdelete.html'"></ng-include>
+    <ng-include src="'templates/modal/teilelementdetails.html'"></ng-include>
+    <ng-include src="'templates/modal/teilelementdelete.html'"></ng-include>
+</div>

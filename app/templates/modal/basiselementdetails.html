@@ -1,0 +1,177 @@
+<!-- Modal -->
+<div class="modal fade" id="myBasiselementDetailModal" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog bigger-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <h3 ng-if="selectedBasiselement.BasiselementID === 'new'" class="modal-title" id="myModalLabelNew"><b>{{ 'BASISELEMENTANLEGEN' | translate }}: {{selectedBasiselement.Basiselementname}}</b></h3>
+
+                        <h3 ng-if="selectedBasiselement.BasiselementID !== 'new'" class="modal-title" id="myModalLabel"><b>{{ 'BASISELEMENT' | translate }}:
+                            {{selectedBasiselement.Basiselementname}}</b></h3>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input ng-model="initBEID2" type="text" class="form-control" placeholder="ID">
+                            <span class="input-group-btn">
+                                <button ng-click="loadValuesFromBEWithTE(initBEID2)" class="btn btn-default" type="button">BE + TE</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="input-group">
+                            <input ng-model="initBEID" type="text" class="form-control" placeholder="ID">
+                            <span class="input-group-btn">
+                                <button ng-click="loadValuesFromBE(initBEID)" class="btn btn-default" type="button">BE</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <button ng-click="resetSelectedBasiselement()" type="button" class="btn btn-default pull-right">{{ 'ZURUECKSETZEN' | translate }} <span class="glyphicon glyphicon-trash"></span></button>
+                    </div>
+                    <div class="col-xs-1">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form name="myForm" class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="BasiselementID" class="col-sm-3 control-label">{{ 'BASISELEMENTID' | translate }}</label>
+                        <div class="col-sm-9">
+                            <input type="text" disabled class="form-control" id="BasiselementID" value="{{selectedBasiselement.BasiselementID}}">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid, 'has-error': !beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'BASISELEMENTNAME' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid,
+                                                'label-danger': !beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid,
+                                                    'glyphicon-warning-sign': !beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <single-tree-select
+                                id="Basiselementname"
+                                tree-model="selectables.basiselemente"
+                                selection="selectedBasiselement.Basiselementname"
+                                btn-div-class="col-sm-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.basiselemente"
+                                validation="beValidator.validationConstraints['selectedBasiselement.Basiselementname'].valid"
+                                placeholder="{{ 'BASISELEMENTNAME' | translate }}">
+                        </single-tree-select>
+                    </div>
+                    <div class="form-group" ng-class="{'has-success': beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid, 'has-error': !beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid}">
+                        <div class="col-sm-3 text-right">
+                            <label class="control-label">{{ 'DESIGNS' | translate }}</label>
+                            <span class="label"
+                                  ng-class="{   'label-success': beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid,
+                                                'label-danger': !beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid}">
+                                <span class="glyphicon"
+                                      ng-class="{   'glyphicon-ok': beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid,
+                                                    'glyphicon-warning-sign': !beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid}">
+                                </span>
+                            </span>
+                        </div>
+                        <tree-select
+                                id="Designs"
+                                tree-model="selectables.designs"
+                                selection="selectedBasiselement.BasiselementDesigns"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-sm-8"
+                                prepared-flatten-list="selectables.flattenLists.designs"
+                                validation="beValidator.validationConstraints['selectedBasiselement.BasiselementDesigns'].valid"
+                                placeholder="{{ 'DESIGNS' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'FORMEN' | translate }}</label>
+                        <tree-select
+                                id="Formen"
+                                tree-model="selectables.formen"
+                                selection="selectedBasiselement.BasiselementFormen"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.formen"
+                                placeholder="{{ 'FORMEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'TRAGEWEISEN' | translate }}</label>
+                        <tree-select
+                                id="Trageweisen"
+                                tree-model="selectables.trageweisen"
+                                selection="selectedBasiselement.BasiselementTrageweisen"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.trageweisen"
+                                placeholder="{{ 'TRAGEWEISEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'ZUSTAENDE' | translate }}</label>
+                        <tree-select
+                                id="Zustaende"
+                                tree-model="selectables.zustaende"
+                                selection="selectedBasiselement.BasiselementZustaende"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.zustaende"
+                                placeholder="{{ 'ZUSTAENDE' | translate }}">
+                        </tree-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'FUNKTIONEN' | translate }}</label>
+                        <tree-select
+                                id="Funktionen"
+                                tree-model="selectables.funktionen"
+                                selection="selectedBasiselement.BasiselementFunktionen"
+                                btn-div-class="col-md-1"
+                                select-div-class="col-md-8"
+                                prepared-flatten-list="selectables.flattenLists.funktionen"
+                                placeholder="{{ 'FUNKTIONEN' | translate }}">
+                        </tree-select>
+                    </div>
+                    <material-picker
+                            tree-model = "selectables.materialien"
+                            selectable-materialien = "selectables.flattenLists.materialien"
+                            selectable-materialeindruecke = "selectables.materialeindruecke"
+                            selection = "selectedBasiselement.BasiselementMaterialien"
+                            id-field-name = "BasiselementID"
+                            targetId = "selectedBasiselement.BasiselementID"
+                            validation="beValidator.validationConstraints['selectedBasiselement.BasiselementMaterialien'].valid"
+                            showvalidation>
+                    </material-picker>
+                    <colour-picker
+                            tree-model = "selectables.farben"
+                            selectable-dominantefarbe = "selectables.flattenLists.farben"
+                            selectable-farbeindruecke = "selectables.farbeindruecke"
+                            selection = "selectedBasiselement.BasiselementFarben"
+                            id-field-name = "BasiselementID"
+                            targetId = "selectedBasiselement.BasiselementID"
+                            validation="beValidator.validationConstraints['selectedBasiselement.BasiselementFarben'].valid"
+                            showvalidation>
+                    </colour-picker>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button ng-disabled="!beValidator.validationResult.valid" ng-if="selectedBasiselement.BasiselementID === 'new'" onclick="$('#myBasiselementDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="createBasiselement(selectedBasiselement)"> {{ 'ANLEGEN' | translate }}
+                </button>
+                <button ng-disabled="!beValidator.validationResult.valid" ng-if="selectedBasiselement.BasiselementID !== 'new'" onclick="$('#myBasiselementDetailModal').modal('hide');"
+                        type="button" class="btn btn-primary"
+                        ng-click="updateBasiselement(selectedBasiselement)"> {{ 'AENDERN' | translate }}
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ABBRECHEN' | translate }}</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog  -->
+</div><!-- /.modal -->
