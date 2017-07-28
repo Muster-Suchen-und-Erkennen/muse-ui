@@ -1,0 +1,70 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ 'ADMIN_PANEL' | translate }}: </h3>
+    </div>
+    <div class="panel-body">
+        <div class="panel panel-default">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 20%" translate>BENUTZER</th>
+                        <th style="width: 35%" translate>PASSWORT</th>
+                        <th style="width: 10%" translate>EDITOR</th>
+                        <th style="width: 20%" translate>TAX_ADMIN</th>
+                        <th style="width: 10%" translate>ADMIN</th>
+                        <th style="width: 5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users | orderBy:'username'">
+                        <td>{{user.username}}</td>
+                        <td>
+                            <input type="password" ng-model="user.password" class="form-control" style="width: 85%; float: left" placeholder=" {{'PASSWORT' | translate }} " ng-disabled="username === user.username">
+                            <button class="btn btn-default" style="float: left" ng-click="changePassword(user)" ng-disabled="username === user.username"><span class="glyphicon glyphicon glyphicon-ok"></span></button>
+                        </td>
+                        <td>
+                            <label>
+                                {{'CAN_EDIT' | translate}}
+                                <input type="checkbox" ng-model="user.isEditor" ng-change="updateEditRights(user)">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                {{'EDIT_TAXONOMIES' | translate}}
+                                <input type="checkbox" ng-model="user.isTaxonomyAdmin" ng-change="updateTaxonomyEditRights(user)">
+                            </label>
+                        </td>
+                        <td>
+                            <label>
+                                {{'IS_ADMIN' | translate}}
+                                <input type="checkbox" ng-model="user.isAdmin" ng-change="updateAdminRights(user)" ng-disabled="username === user.username">
+                            </label>
+                        </td>
+                        <td>
+                            <button ng-click="deleteUser(user.username)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'USER_DELETE_BUTTON' | translate }}" ng-disabled="username === user.username"><span class="glyphicon glyphicon glyphicon-remove"></span> </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <form class="navbar-form">
+                <input type="text" ng-model="newUser.username" class="form-control col-1 col-md-auto" placeholder=" {{'BENUTZER' | translate }} ">
+                <input type="password" ng-model="newUser.password" class="form-control col-2 col-md-auto" placeholder=" {{'PASSWORT' | translate }} ">
+                <label class="col-1">
+                    {{'CAN_EDIT' | translate}}
+                    <input type="checkbox" ng-model="newUser.isEditor" default-value="true">
+                </label>
+                <label class="col-1" style="max-width: 10em">
+                    {{'EDIT_TAXONOMIES' | translate}}
+                    <input type="checkbox" ng-model="newUser.isTaxonomyAdmin" default-value="false">
+                </label>
+                <label class="col-1">
+                    {{'IS_ADMIN' | translate}}
+                    <input type="checkbox" ng-model="newUser.isAdmin" default-value="false">
+                </label>
+                <button class="btn btn-default col-1" ng-click="addUser()"><span class="glyphicon glyphicon glyphicon-plus"></span>{{'ADD_USER' | translate}}</button>
+            </form>
+        </div>
+    </div>
+</div>

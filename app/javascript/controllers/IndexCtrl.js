@@ -15,6 +15,7 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
         {label:'FILMUEBERSICHT', route:'/filmuebersicht'},
         {label:'GENREUEBERSICHT', route:'/genreuebersicht'},
         {label:'SUCHEN', route:'/search'},
+        {label:'ANALYSIS', route:'/analysis'},
         {label:'LOGIN', route:'/login'}
     ];
 

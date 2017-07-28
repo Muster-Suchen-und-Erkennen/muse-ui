@@ -8,16 +8,16 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" >Login</h3>
+                        <h3 class="panel-title">Login</h3>
                     </div>
                     <div class="panel-body">
                         <div ng-hide="user">
-                        <form class="navbar-form" >
-                                <input type="text" ng-model="username"  class="form-control" placeholder=" {{'BENUTZER' | translate }} ">
-                                <input type="password" ng-model="password"  class="form-control" placeholder=" {{'PASSWORT' | translate }} ">
-                                <button class="btn btn-default" ng-click="login(username,password)" >Login</button>
-                        </form>
-                            <div  ng-show="error" class="alert alert-danger" role="alert" translate>LOGINFEHLER</div>
+                            <form class="navbar-form">
+                                <input type="text" ng-model="username" class="form-control" placeholder=" {{'BENUTZER' | translate }} ">
+                                <input type="password" ng-model="password" class="form-control" placeholder=" {{'PASSWORT' | translate }} ">
+                                <button class="btn btn-default" ng-click="login(username,password)">Login</button>
+                            </form>
+                            <div ng-show="error" class="alert alert-danger" role="alert" translate>LOGINFEHLER</div>
                         </div>
 
 
@@ -26,32 +26,34 @@
                                 <div class="alert alert-success" role="alert"> {{'LOGININFO' | translate}} {{user.username}} </div>
                             </div>
                             <div class="col-md-2">
-                                <button class="btn btn-default" ng-click="logout()" >Logout</button>
+                                <button class="btn btn-default" ng-click="logout()">Logout</button>
                             </div>
                         </form>
+                    </div>
                 </div>
-            </div>
 
                 <div ng-show="user">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" >{{'CHANGEPW' | translate }} </h3>
-                    </div>
-                    <div class="panel-body">
-                            <form class="navbar-form" >
-                                <input type="password" ng-model="current_password"  class="form-control" placeholder=" {{'AKTUELLESPW' | translate }} ">
-                                <input type="password" ng-model="new_password"  class="form-control" placeholder=" {{'NEWPW' | translate }} ">
-                                <input type="password" ng-model="new_password2"  class="form-control" placeholder=" {{'REPEATPW' | translate }} ">
-                                <button class="btn btn-default" ng-click="changePassword(current_password, new_password, new_password2, username)" > {{'CHANGEPW' | translate }} </button>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{'CHANGEPW' | translate }} </h3>
+                        </div>
+                        <div class="panel-body">
+                            <form class="navbar-form">
+                                <input type="password" ng-model="current_password" class="form-control" placeholder=" {{'AKTUELLESPW' | translate }} ">
+                                <input type="password" ng-model="new_password" class="form-control" placeholder=" {{'NEWPW' | translate }} ">
+                                <input type="password" ng-model="new_password2" class="form-control" placeholder=" {{'REPEATPW' | translate }} ">
+                                <button class="btn btn-default" ng-click="changePassword(current_password, new_password, new_password2, username)"> {{'CHANGEPW' | translate }} </button>
                             </form>
-                            <div  ng-show="password_error" class="alert alert-danger" role="alert" > {{'PASSWORTFEHLER' | translate }}</div>
-                            <div  ng-show="password_success" class="alert alert-success" role="alert"> {{'AENDERUNGKORREKT' | translate }}</div>
+                            <div ng-show="password_error" class="alert alert-danger" role="alert"> {{'PASSWORTFEHLER' | translate }}</div>
+                            <div ng-show="password_success" class="alert alert-success" role="alert"> {{'AENDERUNGKORREKT' | translate }}</div>
                         </div>
 
                     </div>
+
+                    <admin-panel ng-if="user.roles && (user.roles.indexOf('Admin') !== -1)"></admin-panel>
                 </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>

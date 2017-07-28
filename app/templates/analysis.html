@@ -1,0 +1,67 @@
+<!-- Contentbereich / zwei Spalten -->
+<div ng-controller="AnalysisCtrl">
+
+
+    <div class="container animated fadeIn">
+        <div class="page-header">
+            <h1>{{ 'ANALYSIS' | translate}}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'STATISTIK' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td>{{'NR_OF_FILMS' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.films | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_COSTUMES' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.costumes | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_COSTUMES_PER_FILM' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.costumesPerFilm | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_BASE_ELEMENTS' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.baseElements | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_BASE_ELEMENTS_PER_COSTUME' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.baseElementPerCostume | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_PRIMITIVES' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.teilelemente | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_PRIMITIVES_PER_COSTUME' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.teilelementePerCostume | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'NR_OF_PRIMITIVES_PER_BASE_ELEMENT' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.teilelementePerBaseElement | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'ASSIGNED_COLORS' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.assignedColors | number:1}}</td>
+                                </tr>
+                                <tr>
+                                    <td>{{'ASSIGNED_MATERIALS' | translate}}</td>
+                                    <td style="text-align: right">{{statistic.assignedMaterials | number:1}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

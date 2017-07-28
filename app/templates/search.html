@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <div class="panel panel-default">
+                <!--div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title" translate>KOSTUEMSUCHEN</h3>
                     </div>
@@ -14,15 +14,15 @@
 
                         <form class="navbar-form" role="searchCostume">
                             <div class="form-group">
-                                <input type="number" string-to-number ng-model="filmIDInput"  class="form-control" placeholder="FilmID">
+                                <input type="number" string-to-number ng-model="filmIDInput" class="form-control" placeholder="FilmID">
                                 <input type="number" string-to-number ng-model="rollenIDInput" class="form-control" placeholder="RollenID">
                                 <input type="number" string-to-number ng-model="kostuemIDInput" class="form-control" placeholder="KostuemID">
                             </div>
-                            <button  ng-click="navigateToCostume()"  class="btn btn-default" translate>SUCHEN</button>
+                            <button ng-click="navigateToCostume()" class="btn btn-default" translate>SUCHEN</button>
                         </form>
-                        <div ng-show= "notAvailable" class="alert alert-danger" role="alert" translate>KOSTUEMSUCHEFEHLER</div>
+                        <div ng-show="notAvailable" class="alert alert-danger" role="alert" translate>KOSTUEMSUCHEFEHLER</div>
                     </div>
-                </div>
+                </div-->
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -33,25 +33,47 @@
                             <div class="form-group">
                                 <input type="number" string-to-number ng-model="basiselementIDInput" class="form-control" placeholder="BasiselementID">
                             </div>
-                            <button  ng-click='navigateToCostumeThroughBE()'  class="btn btn-default" translate>SUCHEN</button>
+                            <button ng-click='navigateToCostumeThroughBE()' class="btn btn-default" translate>SUCHEN</button>
                         </form>
-                        <div ng-show= "notAvailable2" class="alert alert-danger" role="alert" translate>BESUCHEFEHLER</div>
+                        <div ng-show="notAvailable2" class="alert alert-danger" role="alert" translate>BESUCHEFEHLER</div>
                     </div>
                 </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title" translate>LEERERELATIONENSUCHEN</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form class="navbar-form" role="searchBaseElement">
-                                <button  ng-click='searchRelations()'  class="btn btn-default" translate>SUCHEN</button>
-                            </form>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>LEERERELATIONENSUCHEN</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="navbar-form" role="searchBaseElement">
+                            <button ng-click='searchRelations()' class="btn btn-default" translate>SUCHEN</button>
+                        </form>
                         <ul>
-                            <li ng-repeat="be in emptyRelations.relations" > {{be.BE}}
+                            <li ng-repeat="be in emptyRelations.relations"> {{be.BE}}
                             </li>
                         </ul>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" translate>KOSTUEMSUCHEN</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form class="navbar-form" role="searchCostume">
+                            <div class="form-group">
+                                <select ng-model="filmIDInput" ng-change="filmSelectionChanged()" class="form-control" ng-options="id as id for (id, _) in costumeData | orderBy" />
+                                <select ng-model="rollenIDInput" ng-change="roleSelectionChanged(false)" class="form-control" ng-options="id as id for (id, _) in costumeData[filmIDInput] | orderBy" />
+                                <select ng-model="kostuemIDInput" class="form-control" ng-options="id for id in costumeData[filmIDInput][rollenIDInput] | orderBy" />
+                            </div>
+                            <button ng-click="nextCostume()" class="btn btn-default" translate>NEXT_COSTUME</button>
+                            <button ng-click="openCostumeInNewTab()" class="btn btn-default" translate>OPEN_COSTUME_NEW_TAB</button>
+                        </form>
+                    </div>
+                </div>
+
+                <network-graph filmid="{{ filmIDInput }}" rollenid="{{ rollenIDInput }}" kostuemid="{{ kostuemIDInput }}"
+                                    on-click-be="beClicked(beID)" auto-reload="true"></network-graph>
 
                     <!--
 href="#/filme/{{filmIDInput}}/rollen/{{rollenIDInput}}/kostueme/{{kostuemIDInput}}"
@@ -73,17 +95,17 @@ href="#/filme/{{filmIDInput}}/rollen/{{rollenIDInput}}/kostueme/{{kostuemIDInput
 
                                             </form>
                                         </div>
-                                        </div>-->
+                                        </div>
 
-                </div>
-
-
+                </div>-->
 
 
 
 
+
+
+            </div>
         </div>
     </div>
-</div>
 
 </div>

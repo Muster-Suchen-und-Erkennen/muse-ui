@@ -1,16 +1,20 @@
 <!-- Contentbereich / zwei Spalten -->
-<div  ng-controller="TestCtrl">
+<div ng-controller="TestCtrl">
 
 
-<style>
-    div.picture1 {
-    width:1000px; /*width of your image*/
-    height:700px; /*height of your image*/
-    background-image:url('../images/femaleForm.jpg');
-    margin:0; /* If you want no margin */
-    padding:0; /*if your want to padding */
-    }
-</style>
+    <style>
+        div.picture1 {
+            width: 1000px;
+            /*width of your image*/
+            height: 700px;
+            /*height of your image*/
+            background-image: url('../images/femaleForm.jpg');
+            margin: 0;
+            /* If you want no margin */
+            padding: 0;
+            /*if your want to padding */
+        }
+    </style>
 
 
     <div class="container animated fadeIn">
@@ -22,52 +26,51 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title" >Kostüm auswählen</h3>
+                        <h3 class="panel-title">Kostüm auswählen</h3>
                     </div>
                     <div class="panel-body">
 
-                        <form class="navbar-form" >
+                        <form class="navbar-form">
                             <div class="form-group">
-                                <input type="number" string-to-number ng-model="filmIDInput"  class="form-control" placeholder="FilmID">
-                                <input type="number" string-to-number ng-model="rollenIDInput" class="form-control" placeholder="RollenID">
-                                <input type="number" string-to-number ng-model="kostuemIDInput" class="form-control" placeholder="KostuemID">
+                                <select ng-model="filmIDInput" ng-change="filmSelectionChanged()" class="form-control" ng-options="id as id for (id, _) in jsonData | orderBy"
+                                />
+                                <!--input type="number" string-to-number ng-model="filmIDInput"  class="form-control" placeholder="FilmID"-->
+                                <select ng-model="rollenIDInput" ng-change="roleSelectionChanged(false)" class="form-control" ng-options="id as id for (id, _) in jsonData[filmIDInput] | orderBy"
+                                />
+                                <!--input type="number" string-to-number ng-model="rollenIDInput" class="form-control" placeholder="RollenID"-->
+                                <select ng-model="kostuemIDInput" class="form-control" ng-options="id for id in jsonData[filmIDInput][rollenIDInput] | orderBy"
+                                />
+                                <!--input type="number" string-to-number ng-model="kostuemIDInput" class="form-control" placeholder="KostuemID"-->
                             </div>
 
                         </form>
 
-                </div>
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" >Basiselement visualisieren</h3>
                     </div>
-                    <div class="panel-body">
 
-                        <button ng-click="" >Load Values</button>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Basiselement visualisieren</h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <!--button ng-click="" >Load Values</button>
                         <button ng-click="drawAgain()" >Draw Network</button>
                         <button ng-click="sortGraphElements()" >Clear Nodes</button>
-                        <button ng-click="clusterByBasic()" >Cluster</button>
+                        <button ng-click="clusterByBasic()" >Cluster</button-->
 
-                        <div style="width: auto; height: 600px" id="mynetwork" ></div>
-                        <div class="picture1" id ="mynetwork2"></div>
+                            <!--div>
+                            {{ jsonData }}
+                        </div-->
 
-
-                        <accordion>
-                        <accordion-group  is-open="isopen">
-                            <accordion-heading>
-                              Netzwerk <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': isopen, 'glyphicon-chevron-right': !isopen}"></i>
-                            </accordion-heading>
-                            <div >
-
-                                <span ng-bind="isopen"></span>
+                            <div class="chart">
+                                <network-graph filmid="{{ filmIDInput | number }}" rollenid="{{ rollenIDInput | number }}" kostuemid="{{ kostuemIDInput | number }}"
+                                    on-click-be="beClicked(beID)" auto-reload="false" on-hover-be="beHovered(beID)" on-clicked-link="linkClicked(from, to)"></network-graph>
                             </div>
-
-                            </accordion-group>
-                        </accordion>
-
+                        </div>
                     </div>
-                </div>
 
-</div>
+                </div>
             </div>
-        </div> </div></div>
+        </div>
+    </div>
+</div>

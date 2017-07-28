@@ -175,6 +175,92 @@ body {
     border-radius: 5px;
 }
 
+.top-buffer {
+    margin-top: 15px;
+}
+
+
+.tablerow-focused {
+    background-color: #abceed;
+}
+
+
+
+/* Styles for network graph */
+.node-frame {
+    opacity:1;
+    fill:#f5f5f5;
+    fill-opacity:1;
+    stroke:#000000;
+    stroke-width:3;
+    stroke-linecap:butt;
+    stroke-linejoin:miter;
+    stroke-miterlimit:4;
+    stroke-dasharray:none;
+    stroke-opacity:1
+}
+
+.node-frame-selected {
+    stroke-width:6;
+}
+
+.node-frame-hovered {
+    fill:#abceed;
+    stroke:#144570;
+}
+
+.linkline {
+    stroke: #999;
+    stroke-opacity: 0.9;
+}
+
+.incoming {
+    stroke: #57b057;
+    stroke-width: 3;
+}
+
+.outgoing {
+    stroke: #ffa500;
+    stroke-width: 3;
+}
+
+.links text {
+    font-size: 12px;
+}
+
+.bodypart {
+    visibility: hidden;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.bodypart-normal {
+    stroke: #357ebd;
+    stroke-width: 0.1px;
+}
+
+.bodypart-selected {
+    stroke: #ffa500;
+    stroke-width: 0.4px;
+}
+
+.figure path {
+    stroke: #000;
+    stroke-width: 0.5px;
+}
+
+.clickable-svg-text:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+
+
+
+
+
 
 /* Style für Alerts */
 .alert > div > p,

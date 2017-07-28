@@ -40,6 +40,8 @@ var translationsDE = {
     BASISELEMENTSUCHEN: "Basiselement suchen",
     SUCHEN: "Suchen",
     LEERERELATIONENSUCHEN: "Leere Basiselementrelationen suchen",
+    NEXT_COSTUME: 'Nächstes Kostüm auswählen',
+    OPEN_COSTUME_NEW_TAB: 'Kostüm in neuen tab öffnen',
 
     //Loginseite
     LOGINFEHLER:"Benutzername oder Passwort ist nicht korrekt!",
@@ -231,9 +233,56 @@ var translationsDE = {
 
     //Error Modal Elemente
     ERRORMODALTITLE: 'Ein Fehler ist aufgetreten',
-    ERRORMODALBODY: 'Fehlernachricht'
+    ERRORMODALBODY: 'Fehlernachricht',
+
+    //Kompositionsgraph
+    NETWORK_GRAPH: 'Kostüm-Kompositions Graph',
+    RELOAD_DATA: 'Daten neu laden.',
+    REDRAW_GRAPH: 'Graph neu zeichnen.',
+    NODE_SIZE: 'Basiselementgröße:',
+    NETWORK_GRAPH_EIN_AUSBLENDEN: 'Kostüm-Kompositions Graph ein-/ausblenden',
+
+    //Admin panel
+    ADMIN_PANEL: 'Admin Panel',
+    EDITOR: 'Editor',
+    CAN_EDIT: 'Kann ändern',
+    TAX_ADMIN: 'Taxonomy Admin',
+    EDIT_TAXONOMIES: 'Kann Taxonomien ändern',
+    ADMIN: 'Admin',
+    IS_ADMIN: 'Ist Admin',
+
+    //Analysis page
+    ANALYSIS: 'Auswertung',
+
+    //Statistic panel
+    STATISTIK: 'Staistik:',
+    NR_OF_FILMS: 'Anzahl erfasster Filme',
+    NR_OF_COSTUMES: 'Anzahl erfasster Kostüme',
+    NR_OF_COSTUMES_PER_FILM: 'Durchschnittliche Anzahl erfasster Kostüme pro Film',
+    NR_OF_BASE_ELEMENTS: 'Anzahl erfasster Base Elements',
+    NR_OF_BASE_ELEMENTS_PER_COSTUME: 'Durchschnittliche Anzahl erfasster Basiselemente pro Kostüm',
+    NR_OF_PRIMITIVES: 'Anzahl erfasster Teilelemente',
+    NR_OF_PRIMITIVES_PER_COSTUME: 'Durchschnittliche Anzahl erfasster Teilelemente pro Kostüm',
+    NR_OF_PRIMITIVES_PER_BASE_ELEMENT: 'Durchschnittliche Anzahl erfasster Teilelemente pro Basiselement',
+    ASSIGNED_COLORS: '~Anzahl zugewiesener Farben',
+    ASSIGNED_MATERIALS: '~Anzahl zugewiesener Materialien',
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var translationsEN = {
     //General
@@ -268,6 +317,8 @@ var translationsEN = {
     BASISELEMENTSUCHEN: "Search Baseelement",
     SUCHEN: "Search",
     LEERERELATIONENSUCHEN: "Search empty Baseelementrelations",
+    NEXT_COSTUME: 'Select next Costume',
+    OPEN_COSTUME_NEW_TAB: 'Open Costume in new Tab',
 
     //Loginpage
     LOGINFEHLER:"Wrong username or password!",
@@ -464,6 +515,38 @@ var translationsEN = {
 
     //Error Modal Elements
     ERRORMODALTITLE: 'An Error occurred',
-    ERRORMODALBODY: 'Error message'
+    ERRORMODALBODY: 'Error message',
+
+    //Kompositionsgraph
+    NETWORK_GRAPH: 'Costume Composition Graph',
+    RELOAD_DATA: 'Relaod Data.',
+    REDRAW_GRAPH: 'Redraw Graph.',
+    NODE_SIZE: 'Baseelement Size:',
+    NETWORK_GRAPH_EIN_AUSBLENDEN: 'Show/hide Costume Composition Graph',
+
+    //Admin panel
+    ADMIN_PANEL: 'Admin Panel',
+    EDITOR: 'Editor',
+    CAN_EDIT: 'Can edit',
+    TAX_ADMIN: 'Taxonomy Admin',
+    EDIT_TAXONOMIES: 'Can edit taxonomies',
+    ADMIN: 'Admin',
+    IS_ADMIN: 'Is Admin',
+
+    //Analysis page
+    ANALYSIS: 'Analyse',
+
+    //Statistic panel
+    STATISTIK: 'Staistic:',
+    NR_OF_FILMS: 'Nr. of Films',
+    NR_OF_COSTUMES: 'Nr. of Costumes',
+    NR_OF_COSTUMES_PER_FILM: 'Average Nr. of Costumes per Film',
+    NR_OF_BASE_ELEMENTS: 'Nr. of Base Elements',
+    NR_OF_BASE_ELEMENTS_PER_COSTUME: 'Average Nr. of Base Elements per Costume',
+    NR_OF_PRIMITIVES: 'Nr. of Primitives',
+    NR_OF_PRIMITIVES_PER_COSTUME: 'Average Nr. of Primitives per Costume',
+    NR_OF_PRIMITIVES_PER_BASE_ELEMENT: 'Average Nr. of Primitives per Base Element',
+    ASSIGNED_COLORS: '~Nr. of assigned Colors',
+    ASSIGNED_MATERIALS: '~Nr. of assigned Materials',
 
 };

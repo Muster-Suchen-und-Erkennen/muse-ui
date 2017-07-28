@@ -34,7 +34,7 @@
                     <li ng-repeat="item in menu" ng-class="{active: item.route == menuActive }"><a href="#{{item.route}}">{{item.label | translate}}</a>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="disabled">{{ 'BACKEND' | translate }} <b>{{ backend.restBackendAddress }}</b></a></li>
+                    <!--li><a class="disabled">{{ 'BACKEND' | translate }} <b>{{ backend.restBackendAddress }}</b></a></li-->
                     <li><a class="btn btn-link" ng-class="{active: states.language === 'de'}" ng-click="changeLanguage('de')">DE</a></li>
                     <li><a class="btn btn-link" ng-class="{active: states.language === 'en'}" ng-click="changeLanguage('en')">EN</a></li>
                 </ul>
@@ -61,6 +61,7 @@
     <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="bower_components/angular-tree-control/angular-tree-control.js"></script>
     <script type="text/javascript" src="bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="bower_components/d3/d3.min.js"></script>
 
     <script type="text/javascript" src="bower_components/angular-ui-select/dist/select.js"></script>
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
@@ -93,6 +94,8 @@
     <script type="text/javascript" src="javascript/directives/singleTreeSelector.js"></script>
     <script type="text/javascript" src="javascript/directives/imageViewer.js"></script>
     <script type="text/javascript" src="javascript/directives/bsImageViewerDialog.js"></script>
+    <script type="text/javascript" src="javascript/directives/networkGraph.js"></script>
+    <script type="text/javascript" src="javascript/directives/adminPanel.js"></script>
 
     <script type="text/javascript" src="javascript/controllers/FilmCtrl.js"></script>
     <script type="text/javascript" src="javascript/controllers/FilmOverviewCtrl.js"></script>
@@ -101,6 +104,7 @@
     <script type="text/javascript" src="javascript/controllers/CostumeCtrl.js"></script>
     <script type="text/javascript" src="javascript/controllers/TestCtrl.js"></script>
     <script type="text/javascript" src="javascript/controllers/SearchCtrl.js"></script>
+    <script type="text/javascript" src="javascript/controllers/AnalysisCtrl.js"></script>
     <script type="text/javascript" src="javascript/controllers/LoginCtrl.js"></script>
     <script type="text/javascript" src="javascript/controllers/IndexCtrl.js"></script>
     <!-- endbuild -->

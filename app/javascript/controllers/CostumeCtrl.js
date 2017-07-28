@@ -11,6 +11,7 @@ angular.module('MUSE').controller('CostumeCtrl', ['$scope', '$timeout', '$interv
 
     $scope.selectables = dbREST.selectables;
     $scope.isCollapsed = false;
+    $scope.showGraph = false;
     $scope.film = dbREST.Filme.get({filmId: $routeParams.filmId});
     $scope.role = dbREST.Rollen.get({filmId: $routeParams.filmId, rollenId: $routeParams.rollenId});
     $scope.selectedScreenshot = {};
@@ -31,6 +32,7 @@ angular.module('MUSE').controller('CostumeCtrl', ['$scope', '$timeout', '$interv
     $scope.tempSingleTeilelement = {};
     $scope.teilelementeDuplicateCheck = {};
     $scope.unsavedData = false;
+    $scope.focus = null;
 
     $scope.selectedCostume = dbREST.Kostueme.get({filmId: $routeParams.filmId, rollenId: $routeParams.rollenId, kostuemId: $routeParams.kostuemId});
     $scope.selectedCostumeCopy = {}
@@ -286,6 +288,17 @@ angular.module('MUSE').controller('CostumeCtrl', ['$scope', '$timeout', '$interv
         $scope.initTempValues();
         $scope.initSelectedBasiselement();
     };
+
+    /**
+     * Show the base-element dialog from javascript based on the base-element id.
+     */
+    $scope.showBeDetailsModalDialog = function (beID) {
+        // FIXME bad workaround: open modal with simulated click
+        $timeout( function() { // break out of $apply cycle
+            angular.element('#WORKAROUND_BE' + beID).trigger('click');
+        }, 0);
+    };
+
     $scope.showBasiselementDetailsModal = function (b) {
         $scope.initTempValues();
         $scope.setSelectedBasiselement(b);
@@ -348,6 +361,18 @@ angular.module('MUSE').controller('CostumeCtrl', ['$scope', '$timeout', '$interv
         $scope.tempMaterial= '';
         $scope.tempMaterialImpression = '';
         */
+    };
+
+    $scope.highlightRelation = function(subjectId, objectId) {
+        var temp = 'relation-' + subjectId + '-' + objectId;
+        $scope.$apply(function () {
+            $scope.focus = temp;
+        });
+        $timeout(function() {
+            if ($scope.focus === temp){
+                $scope.focus=null;
+            }
+        }, 5000);
     };
 
     $scope.addRelation = function(subjectId, operator, objectId){

@@ -195,7 +195,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="r in basiselementRelations | orderBy:'SubjektBasiselement'">
+                        <tr ng-class="{'tablerow-focused': focus === 'relation-' + r.SubjektBasiselement + '-' + r.ObjektBasiselement}" ng-repeat="r in basiselementRelations | orderBy:'SubjektBasiselement'">
                             <td>({{r.SubjektBasiselement}}) {{r.SubjectCaption}}</td>
                             <td>{{r.PraedikatBasiselement}}</td>
                             <td>({{r.ObjektBasiselement}}) {{r.ObjectCaption}}</td>
@@ -209,6 +209,22 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <!-- Bereich für den Netzwerkgraph -->
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" class="btn btn-default" ng-model="singleModel" ng-click="showGraph = !showGraph">{{ 'NETWORK_GRAPH_EIN_AUSBLENDEN' | translate }}</button>
+            </div>
+            <!-- Begin area for bad workaround buttons to show a modal.-->
+            <div class="col-md-1" style="visibility: collapse" ng-repeat="be in selectedCostume.KostuemBasiselemente">
+                <button style="padding: 0" data-toggle="modal" data-target="#myBasiselementDetailModal" ng-click="showBasiselementDetailsModal(be)" class="btn" id="{{ 'WORKAROUND_BE' + be.BasiselementID}}" />
+            </div>
+            <!-- End area for bad workaround buttons to show a modal.-->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <network-graph ng-if="showGraph" filmid="{{film.FilmID}}" rollenid="{{role.RollenID}}" kostuemid="{{selectedCostume.KostuemID}}" on-click-be="showBeDetailsModalDialog(beID)" on-click-relation="highlightRelation(from, to)"></network-graph>
             </div>
         </div>
     </div>

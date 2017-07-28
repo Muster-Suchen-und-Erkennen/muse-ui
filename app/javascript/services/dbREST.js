@@ -47,6 +47,17 @@ angular.module('MUSE').factory('dbREST', ['$resource', '$rootScope', '$filter', 
         Typus: $resource($rootScope.backend.restBackendAddress + '/typusdomaene/:typusId'),
         Zustaende: $resource($rootScope.backend.restBackendAddress + '/zustaende/:zustandsId'),
 
+        // full costume list
+        Costumes: $resource($rootScope.backend.restBackendAddress + '/kostueme'),
+
+        // statistic
+        Statistic: $resource($rootScope.backend.restBackendAddress + '/statistic'),
+
+        // users (admin functions)
+        Users: $resource($rootScope.backend.restBackendAddress + '/users'),
+        User: $resource($rootScope.backend.restBackendAddress + '/users/:username'),
+        UserRoles: $resource($rootScope.backend.restBackendAddress + '/users/:username/roles/:role'),
+
         //Complex Ressources
         Basiselemente: $resource($rootScope.backend.restBackendAddress + '/filme/:filmId/rollen/:rollenId/kostueme/:kostuemId/basiselemente/:basiselementId', {}, { update: {method: 'PUT'} }),
         QueryBasiselement: $resource($rootScope.backend.restBackendAddress + '/basiselemente/:basiselementId'),

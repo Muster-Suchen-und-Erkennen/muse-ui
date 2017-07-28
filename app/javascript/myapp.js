@@ -22,6 +22,10 @@ angular.module('MUSE')
                     templateUrl: 'templates/genreoverview.html',
                     reloadOnSearch: false
                 }).
+                when('/analysis', {
+                    templateUrl: 'templates/analysis.html',
+                    reloadOnSearch: false
+                }).
                 when('/filme/:filmId/rollen/:rollenId', {
                     templateUrl: 'templates/film.html'
                 }).
