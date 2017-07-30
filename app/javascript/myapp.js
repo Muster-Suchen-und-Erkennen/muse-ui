@@ -41,6 +41,9 @@ angular.module('MUSE')
                 when('/search', {
                     templateUrl: 'templates/search.html'
                 }).
+                when('/taxonomies', {
+                    templateUrl: 'templates/taxonomyEditing.html'
+                }).
                 when('/login', {
                     templateUrl: 'templates/login.html'
                 }).
@@ -139,4 +142,6 @@ angular.module('MUSE')
 
             restBackendAddress: $location.protocol() + '://' + $location.host() + ':' + serverPort
         };
+
+        $rootScope.user;
     }]);
