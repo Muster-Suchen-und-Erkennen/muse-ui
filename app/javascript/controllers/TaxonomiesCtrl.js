@@ -10,7 +10,12 @@ angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$http','dbREST',
 
 
     $scope.taxonomies = dbREST.EditableTaxonomies.get();
-    $scope.currentTaxonomy = null;
+    $scope.currentTaxonomy = 'test';
+    $scope.test = 't';
+
+    $scope.onSelect = function (item) {
+        $scope.currentTaxonomy = item;
+    };
 
 
 }]);

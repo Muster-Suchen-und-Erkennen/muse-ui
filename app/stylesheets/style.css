@@ -257,6 +257,29 @@ body {
 }
 
 
+/*styles for treeview*/
+.css-treeview input[type='checkbox'] + label + ul
+{
+    display: none;
+}
+
+.css-treeview input[type='checkbox']:checked + label + ul
+{
+    display: block;
+}
+
+.css-treeview input[type='checkbox']
+{
+    position: absolute;
+    opacity: 0;
+}
+
+.css-treeview label,
+.css-treeview label::before
+{
+    cursor: pointer;
+}
+
 
 
 

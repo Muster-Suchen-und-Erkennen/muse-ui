@@ -1,0 +1,30 @@
+<div class="panel panel-default" style="margin-top: 15px;">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ taxonomy }}: </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            {{selectedParent}}, {{newItem}}
+            <script type="text/ng-template" id="treeTaxonomyItem.html">
+                <input type="checkbox" id="tax-item-{{child.id}}", checked="true"/>
+                <label for="tax-item-{{child.id}}">
+                    <button class="btn btn-danger btn-xs" ng-click="deleteElement(child)"><span class="glyphicon glyphicon-remove"></span></button>
+                    <span>{{child.id}}</span>
+                    <button class="btn btn-xs btn-default pull-right" ng-click="selectAsParent(child)"><span class="glyphicon glyphicon-plus"></span></button>
+                </label>
+                <ul ng-show="selectedParent == child.id">
+                    <li>
+                        <input type="text" ng-model="newItem"/>
+                    </li>
+                </ul>
+                <ul ng-if="child.children">
+                    <li ng-repeat="child in child.children" ng-include src="'treeTaxonomyItem.html'"></li>
+                </ul>
+            </script>
+
+            <ul class="css-treeview">
+                <li ng-repeat="child in data" ng-include="'treeTaxonomyItem.html'"></li>
+            </ul>
+        </div>
+    </div>
+</div>
