@@ -4,27 +4,28 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            {{selectedParent}}, {{newItem}}
-            <script type="text/ng-template" id="treeTaxonomyItem.html">
-                <input type="checkbox" id="tax-item-{{child.id}}", checked="true"/>
-                <label for="tax-item-{{child.id}}">
-                    <button class="btn btn-danger btn-xs" ng-click="deleteElement(child)"><span class="glyphicon glyphicon-remove"></span></button>
-                    <span>{{child.id}}</span>
-                    <button class="btn btn-xs btn-default pull-right" ng-click="selectAsParent(child)"><span class="glyphicon glyphicon-plus"></span></button>
-                </label>
-                <ul ng-show="selectedParent == child.id">
-                    <li>
-                        <input type="text" ng-model="newItem"/>
-                    </li>
-                </ul>
-                <ul ng-if="child.children">
-                    <li ng-repeat="child in child.children" ng-include src="'treeTaxonomyItem.html'"></li>
-                </ul>
-            </script>
+            <div class="col-md-12">
+                {{selectedParent}}, {{newItem}}
+                <script type="text/ng-template" id="treeTaxonomyItem.html">
+                    <input type="checkbox" id="tax-item-{{child.id}}", checked="true"/>
+                    <label class="btn-group" for="tax-item-{{child.id}}">
+                        <button class="btn btn-danger btn-xs" ng-click="deleteElement(child)"><span class="glyphicon glyphicon-remove"></span></button>
+                        <span class="btn btn-default btn-xs">{{child.id}}</span>
+                        <button class="btn btn-xs btn-default" ng-click="selectAsParent(child)"><span class="glyphicon glyphicon-plus"></span></button>
+                    </label>
+                    <ul ng-if="child.children || selectedParent == child.id">
+                        <li ng-show="selectedParent == child.id">
+                            <input class="form-control" style="display: inline; width: initial" type="text" ng-model="newItem.name"/>
+                            <button class="btn btn-success" ng-click="addElement()"><span class="glyphicon glyphicon-ok"></span></button>
+                        </li>
+                        <li ng-repeat="child in child.children" ng-include src="'treeTaxonomyItem.html'"></li>
+                    </ul>
+                </script>
 
-            <ul class="css-treeview">
-                <li ng-repeat="child in data" ng-include="'treeTaxonomyItem.html'"></li>
-            </ul>
+                <ul class="css-treeview">
+                    <li ng-repeat="child in data" ng-include="'treeTaxonomyItem.html'"></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -18,10 +18,23 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
         scope.data = taxonomyMapping[scope.taxonomy].query();
         scope.selectedParent = '';
-        scope.newItem = '';
+        scope.newItem = {name:''};
 
         scope.selectAsParent = function (item) {
             scope.selectedParent = item.id;
+        };
+
+        scope.addElement = function () {
+            var body = {
+                name: scope.newItem.name,
+                parent: scope.selectedParent,
+            };
+            dbREST.AddTaxonomyItem.save({taxonomy: scope.taxonomy}, body, function (success) {
+                scope.data = taxonomyMapping[scope.taxonomy].query();
+            }, function (htmlStatus) {
+                // something bad happened
+                // FIXME
+            });
         };
 
         scope.deleteElement = function (item) {
