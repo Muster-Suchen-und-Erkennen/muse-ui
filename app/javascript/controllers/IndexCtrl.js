@@ -16,16 +16,9 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
         {label:'GENREUEBERSICHT', route:'/genreuebersicht'},
         {label:'SUCHEN', route:'/search'},
         {label:'ANALYSIS', route:'/analysis'},
+        {label:'TAXONOMIES', route:'/taxonomies'},
         {label:'LOGIN', route:'/login'}
     ];
-
-    function insertAdminPages() {
-        if ($scope.user && $scope.user.roles && ($scope.user.roles.indexOf('Admin') !== -1)) {
-            var temp = $scope.menu.pop();
-            $scope.menu.push({label:'TAXONOMIES', route:'/taxonomies'});
-            $scope.menu.push(temp)
-        }
-    }
 
     /**
      * Initial User Status Check to set the Login Route to Logout if a user is logged in
@@ -35,7 +28,6 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
             dbREST.Loggedin.get({}, function (value) {
                 $rootScope.user = value;
                 $rootScope.loggedIn = true;
-                insertAdminPages();
             });
         }
     }

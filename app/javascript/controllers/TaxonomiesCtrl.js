@@ -6,16 +6,20 @@
 /**
  * TaxonomiesCtrl
  */
-angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$http','dbREST','$log','$q', function ($scope, $http , dbREST, $log, $q ) {
+angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$rootScope', '$http','dbREST','$log','$q', function ($scope, $rootScope, $http , dbREST, $log, $q ) {
 
 
     $scope.taxonomies = dbREST.EditableTaxonomies.get();
     $scope.currentTaxonomy = 'test';
-    $scope.test = 't';
+    $scope.isTaxAdmin = false;
+
+    if ($rootScope.user && $rootScope.user.roles && ($rootScope.user.roles.indexOf('TaxAdmin') !== -1)) {
+        $scope.isTaxAdmin = true;
+    };
+
 
     $scope.onSelect = function (item) {
         $scope.currentTaxonomy = item;
     };
-
 
 }]);

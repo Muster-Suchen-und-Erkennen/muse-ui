@@ -16,15 +16,23 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     function link (scope, element, attr) {
 
+        scope.editable = angular.isDefined(scope.editable) ? scope.editable : false;
+
         scope.data = taxonomyMapping[scope.taxonomy].query();
         scope.selectedParent = '';
         scope.newItem = {name:''};
 
         scope.selectAsParent = function (item) {
+            if (!scope.editable) {
+                return;
+            }
             scope.selectedParent = item.id;
         };
 
         scope.addElement = function () {
+            if (!scope.editable) {
+                return;
+            }
             var body = {
                 name: scope.newItem.name,
                 parent: scope.selectedParent,
@@ -38,6 +46,9 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         };
 
         scope.deleteElement = function (item) {
+            if (!scope.editable) {
+                return;
+            }
             dbREST.DeleteTaxonomyItem.delete({taxonomy: scope.taxonomy, name: item.id}, function (success) {
                 scope.data = taxonomyMapping[scope.taxonomy].query();
             }, function (htmlStatus) {
@@ -54,7 +65,8 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         restrict: 'E',
         templateUrl: 'templates/directives/treeTaxonomyEditor.html',
         scope: {
-            taxonomy: '@?',
+            editable: '@?',
+            taxonomy: '@',
         },
         link: link
     };

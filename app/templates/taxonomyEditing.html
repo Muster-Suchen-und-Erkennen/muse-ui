@@ -20,7 +20,7 @@
             <div ng-if="currentTaxonomy.type === 'list'">
             </div>
             <div ng-if="currentTaxonomy.type === 'tree'">
-                <tree-taxonomy-editor taxonomy="{{currentTaxonomy.name}}" />
+                <tree-taxonomy-editor editable="{{isTaxAdmin}}", taxonomy="{{currentTaxonomy.name}}" />
             </div>
         </div>
 
