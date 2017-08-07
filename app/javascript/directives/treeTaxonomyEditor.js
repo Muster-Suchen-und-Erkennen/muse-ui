@@ -12,6 +12,16 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     var taxonomyMapping = {
         Basiselement: dbREST.BasiselementDomaene,
+        Genre: dbREST.Genres,
+        Körpermodifikationen: dbREST.Koerpermodifikationen,
+        Material: dbREST.Materialien,
+        Produktionsort: dbREST.Produktionsorte,
+        Beruf: dbREST.Rollenberufe,
+        Spielort: dbREST.Spielorte,
+        'Spielort (Detail)': dbREST.SpielortDetails,
+        Spielzeit: dbREST.Spielzeiten,
+        Stereotyp: dbREST.Stereotypen,
+        Teilelement: dbREST.TeilelementDomaene,
     };
 
     function link (scope, element, attr) {
