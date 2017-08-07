@@ -13,9 +13,13 @@ angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$rootScope', '$h
     $scope.currentTaxonomy = 'test';
     $scope.isTaxAdmin = false;
 
-    if ($rootScope.user && $rootScope.user.roles && ($rootScope.user.roles.indexOf('TaxAdmin') !== -1)) {
-        $scope.isTaxAdmin = true;
-    };
+    $rootScope.$watch("user", function() {
+        if ($rootScope.user && $rootScope.user.roles && ($rootScope.user.roles.indexOf('TaxAdmin') !== -1)) {
+            $scope.isTaxAdmin = true;
+        } else {
+            $scope.isTaxAdmin = false;
+        };
+    });
 
 
     $scope.onSelect = function (item) {

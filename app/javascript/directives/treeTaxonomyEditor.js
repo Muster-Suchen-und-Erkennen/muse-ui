@@ -23,14 +23,14 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         scope.newItem = {name:''};
 
         scope.selectAsParent = function (item) {
-            if (!scope.editable) {
+            if (!scope.isEditable) {
                 return;
             }
             scope.selectedParent = item.id;
         };
 
         scope.addElement = function () {
-            if (!scope.editable) {
+            if (!scope.isEditable) {
                 return;
             }
             var body = {
@@ -46,7 +46,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         };
 
         scope.deleteElement = function (item) {
-            if (!scope.editable) {
+            if (!scope.isEditable) {
                 return;
             }
             dbREST.DeleteTaxonomyItem.delete({taxonomy: scope.taxonomy, name: item.id}, function (success) {
