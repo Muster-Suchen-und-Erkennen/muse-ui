@@ -16,7 +16,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     function link (scope, element, attr) {
 
-        scope.editable = angular.isDefined(scope.editable) ? scope.editable : false;
+        scope.editable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
 
         scope.data = taxonomyMapping[scope.taxonomy].query();
         scope.selectedParent = '';
