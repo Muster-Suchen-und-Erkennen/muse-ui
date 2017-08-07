@@ -32,6 +32,13 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         scope.selectedParent = '';
         scope.newItem = {name:''};
 
+
+        scope.$watch('taxonomy', function (newVal, oldVal) {
+            if (newVal !== oldVal) {
+                scope.data = taxonomyMapping[scope.taxonomy].query();
+            }
+        });
+
         scope.selectAsParent = function (item) {
             if (!scope.isEditable) {
                 return;
