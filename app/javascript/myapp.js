@@ -7,7 +7,7 @@
 /**
  * Module Definition: MUSE
  */
-angular.module('MUSE', ['ngResource', 'ui.bootstrap', 'ngRoute', 'angularFileUpload', 'ui.utils', 'pascalprecht.translate', 'angular-loading-bar', 'ui.select', 'ngSanitize']);
+angular.module('MUSE', ['ngResource', 'ui.bootstrap', 'ngRoute', 'angularFileUpload', 'ui.utils', 'pascalprecht.translate', 'angular-loading-bar', 'ui.select', 'ngSanitize', 'angular-confirm']);
 angular.module('MUSE')
     .config(['$routeProvider',
         function ($routeProvider) {
