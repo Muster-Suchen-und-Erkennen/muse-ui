@@ -31,6 +31,8 @@ var translationsDE = {
     FARBENWAEHLEN: 'Farbe auswählen...',
     KOERPERTEIL: 'Körperteil',
     UNSAVED_DATA: 'Ungespeicherte Änderungen vorhanden!',
+    DELETE_QUESTION_PART_ONE: 'Möchtest du',
+    DELETE_QUESTION_PART_TWO: 'wirklich löschen?',
 
     //Suche
     KOSTUEMSUCHEFEHLER: "Das Kost&uuml;m konnte leider nicht gefunden werden",
@@ -267,6 +269,9 @@ var translationsDE = {
     ASSIGNED_COLORS: '~Anzahl zugewiesener Farben',
     ASSIGNED_MATERIALS: '~Anzahl zugewiesener Materialien',
 
+    //Taxonomy page
+    TAXONOMIES: 'Taxonomien',
+
 };
 
 
@@ -308,6 +313,8 @@ var translationsEN = {
     FARBENWAEHLEN: 'Choose a Color',
     KOERPERTEIL: 'Body Part',
     UNSAVED_DATA: 'Unsaved data!',
+    DELETE_QUESTION_PART_ONE: 'Do you want to delete',
+    DELETE_QUESTION_PART_TWO: '?',
 
     //Searchpage
     KOSTUEMSUCHEFEHLER: "Couldn't find the Costume!",
@@ -548,5 +555,8 @@ var translationsEN = {
     NR_OF_PRIMITIVES_PER_BASE_ELEMENT: 'Average Nr. of Primitives per Base Element',
     ASSIGNED_COLORS: '~Nr. of assigned Colors',
     ASSIGNED_MATERIALS: '~Nr. of assigned Materials',
+
+    //Taxonomy page
+    TAXONOMIES: 'Taxonomies',
 
 };
