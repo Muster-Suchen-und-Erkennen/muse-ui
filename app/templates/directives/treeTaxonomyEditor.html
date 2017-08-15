@@ -10,10 +10,10 @@
                     <label class="btn-group" for="tax-item-{{child.id}}">
                         <button ng-if="isEditable" class="btn btn-danger btn-xs"
                             ng-click="deleteElement(child)"
-                            confirm="{{DELETE_QUESTION_PART_ONE | translate}} '{{child.id}}' {{DELETE_QUESTION_PART_TWO | translate}}"
-                            confirm-title="{{loeschen | translate}}"
-                            confirm-ok="{{loeschen | translate}}"
-                            confirm-cancel="{{ABBRECHEN | translate}}">
+                            confirm="{{'DELETE_QUESTION_PART_ONE' | translate}} '{{child.id}}' {{'DELETE_QUESTION_PART_TWO' | translate}}"
+                            confirm-title="{{'loeschen' | translate}}"
+                            confirm-ok="{{'loeschen' | translate}}"
+                            confirm-cancel="{{'ABBRECHEN' | translate}}">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                         <span class="btn btn-default btn-xs">{{child.id}}</span>
