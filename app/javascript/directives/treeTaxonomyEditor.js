@@ -37,7 +37,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
                 scope.data = [];
                 return;
             }
-            taxonomyMapping[scope.taxonomy].query().then(function(result) {
+            taxonomyMapping[scope.taxonomy].query().$promise.then(function(result) {
                 scope.data = result;
             });
         };
