@@ -28,14 +28,23 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
         scope.isEditable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
 
-        scope.data = taxonomyMapping[scope.taxonomy].query();
+        scope.data = [];
         scope.selectedParent = '';
         scope.newItem = {name:''};
 
+        scope.reloadTaxonomy = function () {
+            if (!(scope.taxonomy in taxonomyMapping)) {
+                scope.data = [];
+                return;
+            }
+            taxonomyMapping[scope.taxonomy].query().then(function(result) {
+                scope.data = result;
+            });
+        };
 
         scope.$watch('taxonomy', function (newVal, oldVal) {
             if (newVal !== oldVal) {
-                scope.data = taxonomyMapping[scope.taxonomy].query();
+                scope.reloadTaxonomy();
             }
         });
 
@@ -55,7 +64,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
                 parent: scope.selectedParent,
             };
             dbREST.AddTaxonomyItem.save({taxonomy: scope.taxonomy}, body, function (success) {
-                scope.data = taxonomyMapping[scope.taxonomy].query();
+                scope.reloadTaxonomy();
             }, function (htmlStatus) {
                 // something bad happened
                 // FIXME
@@ -67,7 +76,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
                 return;
             }
             dbREST.DeleteTaxonomyItem.delete({taxonomy: scope.taxonomy, name: item.id}, function (success) {
-                scope.data = taxonomyMapping[scope.taxonomy].query();
+                scope.reloadTaxonomy();
             }, function (htmlStatus) {
                 // something bad happened
                 // FIXME

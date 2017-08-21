@@ -9,16 +9,20 @@
 angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$rootScope', '$http','dbREST','$log','$q', function ($scope, $rootScope, $http , dbREST, $log, $q ) {
 
 
-    $scope.taxonomies = dbREST.EditableTaxonomies.get();
+    $scope.taxonomies = [];
     $scope.currentTaxonomy = 'test';
     $scope.isTaxAdmin = false;
 
-    $rootScope.$watch("user", function() {
+    dbREST.EditableTaxonomies.get().then(function(result) {
+        $scope.taxonomies = result;
+    });
+
+    $rootScope.$watch('user', function() {
         if ($rootScope.user && $rootScope.user.roles && ($rootScope.user.roles.indexOf('TaxAdmin') !== -1)) {
             $scope.isTaxAdmin = true;
         } else {
             $scope.isTaxAdmin = false;
-        };
+        }
     });
 
 
