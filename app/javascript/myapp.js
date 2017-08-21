@@ -88,6 +88,10 @@ angular.module('MUSE')
         $resourceProvider.cache = true;
     }])
 
+    .config(['$translateProvider', function($translateProvider) {
+        $translateProvider.useSanitizeValueStrategy('escape');
+    }])
+
     .run(['$rootScope', '$translate', '$location','$log','$anchorScroll', function ($rootScope, $translate, $location, $log, $anchorScroll) {
         $anchorScroll.yOffset = 100;
 
