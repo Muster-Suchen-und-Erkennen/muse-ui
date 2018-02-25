@@ -12,9 +12,6 @@
         $scope.logout = logout;
         $scope.changePassword = changePassword;
 
-        //Constants
-        $scope.user = "";
-
         //Input Variables
         $scope.username= "";
         $scope.password = "";
@@ -40,7 +37,7 @@
 
             dbREST.Login.save({username: username, password: password}, function(value)  {
                 AuthTokenFactory.setToken(value.token);
-                $scope.user = value.user;
+                $rootScope.user = value.user;
                 $rootScope.loggedIn = true;
                 setTimeout(function(){$window.location.reload();}, 500);
             }, function(error)
@@ -51,7 +48,7 @@
 
         function logout() {
             AuthTokenFactory.setToken();
-            $scope.user = null;
+            $rootScope.user = null;
             resetPasswordValues();
             resetLoginValues();
             $scope.error = false;
@@ -77,7 +74,7 @@
                 $scope.password_success = false;
                 return
             }
-            dbREST.ChangePassword.save({current_password: current_password, new_password: new_password, username: $scope.user.username }, function(value){
+            dbREST.ChangePassword.save({current_password: current_password, new_password: new_password, username: $rootScope.user.username }, function(value){
 
                 $scope.password_error = false;
                 $scope.password_success= true;
@@ -94,7 +91,7 @@
         function getUser() {
             if (AuthTokenFactory.getToken()) {
                 dbREST.Loggedin.get({}, function (value) {
-                    $scope.user = value;
+                    $rootScope.user = value;
                     $rootScope.loggedIn = true;
                 });
             }

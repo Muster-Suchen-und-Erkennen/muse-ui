@@ -16,6 +16,7 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
         {label:'GENREUEBERSICHT', route:'/genreuebersicht'},
         {label:'SUCHEN', route:'/search'},
         {label:'ANALYSIS', route:'/analysis'},
+        {label:'TAXONOMIES', route:'/taxonomies'},
         {label:'LOGIN', route:'/login'}
     ];
 
@@ -25,8 +26,11 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
     function checkLoginStatus() {
         if (AuthTokenFactory.getToken()) {
             dbREST.Loggedin.get({}, function (value) {
+                $rootScope.user = value;
                 $rootScope.loggedIn = true;
-            }); }}
+            });
+        }
+    }
 
     // run the Method on first start
     checkLoginStatus();

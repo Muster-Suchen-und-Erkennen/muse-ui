@@ -10,7 +10,7 @@
 angular.module('MUSE').controller('GenreOverviewCtrl', ['$scope', 'dbREST', '$route', '$timeout', '$q', '$log', '$location', '$anchorScroll', function ($scope, dbREST, $route, $timeout, $q, $log, $location, $anchorScroll) {
     var genres = dbREST.Genres.query();
     var filme = dbREST.Filme.query();
-    var tempGenres = {}
+    var tempGenres = {};
     $scope.abc = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.selectedFilm = {};
 
@@ -55,6 +55,7 @@ angular.module('MUSE').controller('GenreOverviewCtrl', ['$scope', 'dbREST', '$ro
                 for (var key in tempGenres) {
                     $scope.genres.push(tempGenres[key]);
                 }
+                $scope.$apply();
             });
         } , function (params) {
 

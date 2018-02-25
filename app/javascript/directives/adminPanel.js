@@ -8,7 +8,7 @@
 
 'use strict';
 
-function AngularAdminPanelDirective($log, dbREST) {
+function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     function link (scope, element, attr) {
 
@@ -159,4 +159,4 @@ function AngularAdminPanelDirective($log, dbREST) {
 }
 
 angular.module('MUSE')
-    .directive('adminPanel', ['$log', 'dbREST', AngularAdminPanelDirective]);
+    .directive('adminPanel', ['$log', 'dbREST', AngularTreeTaxonomyEditorDirective]);

@@ -54,7 +54,7 @@ angular.module('MUSE').factory('dbREST', ['$resource', '$rootScope', '$filter', 
         Statistic: $resource($rootScope.backend.restBackendAddress + '/statistic'),
 
         // taxonomy admin functions
-        EditableTaxonomies: $resource($rootScope.backend.restBackendAddress + '/taxonomies'),
+        EditableTaxonomies: $resource($rootScope.backend.restBackendAddress + '/taxonomies', {}, {get: {method: 'GET', isArray: true}}),
         AddTaxonomyItem: $resource($rootScope.backend.restBackendAddress + '/taxonomies/:taxonomy'),
         DeleteTaxonomyItem: $resource($rootScope.backend.restBackendAddress + '/taxonomies/:taxonomy/:name'),
 

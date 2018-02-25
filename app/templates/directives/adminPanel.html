@@ -41,7 +41,14 @@
                             </label>
                         </td>
                         <td>
-                            <button ng-click="deleteUser(user.username)" class="btn btn-danger btn-xs pull-right" tooltip-html-unsafe="{{ 'USER_DELETE_BUTTON' | translate }}" ng-disabled="username === user.username"><span class="glyphicon glyphicon glyphicon-remove"></span> </button>
+                            <button ng-click="deleteUser(user.username)" class="btn btn-danger btn-xs pull-right"
+                                ng-disabled="username === user.username"
+                                confirm="{{'DELETE_QUESTION_PART_ONE' | translate}} '{{user.username}}' {{'DELETE_QUESTION_PART_TWO' | translate}}"
+                                confirm-title="{{'loeschen' | translate}}"
+                                confirm-ok="{{'loeschen' | translate}}"
+                                confirm-cancel="{{'ABBRECHEN' | translate}}">
+                                <span class="glyphicon glyphicon glyphicon-remove"></span>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
