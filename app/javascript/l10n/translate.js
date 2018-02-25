@@ -9,7 +9,7 @@ angular.module('MUSE').config(['$translateProvider', function ($translateProvide
 
 var translationsDE = {
     //General
-    TITEL: 'MUSE - MUster Suchen und Erkennen - Kost&uuml;m Repository',
+    TITEL: 'MUSE - MUster Suchen und Erkennen - Kostüm Repository',
     MARKE: 'MUSE Kostüm Repository',
     FILMTITEL: 'Filmtitel',
     ORIGINALTITEL: 'Originaltitel',
@@ -33,15 +33,15 @@ var translationsDE = {
     UNSAVED_DATA: 'Ungespeicherte Änderungen vorhanden!',
 
     //Suche
-    KOSTUEMSUCHEFEHLER: "Das Kost&uuml;m konnte leider nicht gefunden werden",
+    KOSTUEMSUCHEFEHLER: "Das Kostüm konnte leider nicht gefunden werden",
     BESUCHEFEHLER: "Das Basiselement konnte leider nicht gefunden werden",
-    KOSTUEMSUCHEN: "Kost&uuml;m suchen",
+    KOSTUEMSUCHEN: "Kostüm suchen",
     TEILELEMENTSUCHEN: "Teilelement suchen",
     BASISELEMENTSUCHEN: "Basiselement suchen",
     SUCHEN: "Suchen",
     LEERERELATIONENSUCHEN: "Leere Basiselementrelationen suchen",
     NEXT_COSTUME: 'Nächstes Kostüm auswählen',
-    OPEN_COSTUME_NEW_TAB: 'Kostüm in neuen tab öffnen',
+    OPEN_COSTUME_NEW_TAB: 'Kostüm in neuem Tab öffnen',
 
     //Loginseite
     LOGINFEHLER:"Benutzername oder Passwort ist nicht korrekt!",
@@ -75,7 +75,7 @@ var translationsDE = {
     DETAILSZUFILM: 'Details zu Film <b>{{  filmtitle }}</b> anzeigen',
     FILMLOESCHENBUTTON: 'Film <b>{{filmtitle}}</b> löschen!',
     FILMLOESCHEN: 'Film löschen!',
-    FILMLOESCHENTEXT: '<p>Soll der Film</p><p><h2>{{filmtitle}}</h2></p><p>wirklich gel&ouml;scht werden?</p>',
+    FILMLOESCHENTEXT: '<p>Soll der Film</p><p><h2>{{filmtitle}}</h2></p><p>wirklich gelöscht werden?</p>',
 
     //Genreoverview
     GENREUEBERSICHT: 'Genreübersicht',
@@ -134,7 +134,7 @@ var translationsDE = {
     STEREOTYP: 'Stereotyp',
 
     //RoleDeleteModal
-    ROLLELOESCHENTEXT: '<p>Soll die Rolle</p><p><h2>#{{rollenid}}: {{rollenvorname}} {{rollennachname}}</h2></p><p>wirklich gel&ouml;scht werden?</p>',
+    ROLLELOESCHENTEXT: '<p>Soll die Rolle</p><p><h2>#{{rollenid}}: {{rollenvorname}} {{rollennachname}}</h2></p><p>wirklich gelöscht werden?</p>',
 
     //RoleCostumeOverview
     KOSTUEMUEBERSICHTVON: 'Kostümübersicht von',
@@ -146,7 +146,7 @@ var translationsDE = {
     KOMPOSITIONZEIGEN: 'Komposition des Kostüms <b>{{ kurztext }}</b> anzeigen',
     KOSTUEMLOESCHEN: 'Kostüm löschen!',
     KOSTUEMLOESCHENHEADING: 'Kostüm "{{ kurztext }}" löschen!',
-    KOSTUEMLOESCHENTEXT: '<p>Soll das Kostüm</p><p><h2>#{{kostuemid}}: {{kostuemkurztext}}</h2></p><p>wirklich gel&ouml;scht werden?</p>',
+    KOSTUEMLOESCHENTEXT: '<p>Soll das Kostüm</p><p><h2>#{{kostuemid}}: {{kostuemkurztext}}</h2></p><p>wirklich gelöscht werden?</p>',
 
     //CostumeData
     KURZTEXT: 'Kurztext',
@@ -286,7 +286,7 @@ var translationsDE = {
 
 var translationsEN = {
     //General
-    TITEL: 'MUSE - MUster Suchen und Erkennen - Kost&uuml;m Repository',
+    TITEL: 'MUSE - MUster Suchen und Erkennen - Kostüm Repository',
     MARKE: 'MUSE Costume Repository',
     FILMTITEL: 'Film Title',
     ORIGINALTITEL: 'Original Titel',
