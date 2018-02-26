@@ -8,7 +8,7 @@
 
 'use strict';
 
-function AngularListTaxonomyEditorDirective($log, dbREST) {
+function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
 
     var taxonomyMapping = {
         'Materialeindruck': dbREST.Materialeindruck,
@@ -28,9 +28,9 @@ function AngularListTaxonomyEditorDirective($log, dbREST) {
                 return;
             }
             taxonomyMapping[scope.taxonomy].query().$promise.then(function(result) {
-                scope.$apply(() => {
+                $timeout(() => {
                     scope.data = result;
-                });
+                }, 0);
             });
         };
 
@@ -83,4 +83,4 @@ function AngularListTaxonomyEditorDirective($log, dbREST) {
 }
 
 angular.module('MUSE')
-    .directive('listTaxonomyEditor', ['$log', 'dbREST', AngularListTaxonomyEditorDirective]);
+    .directive('listTaxonomyEditor', ['$log', 'dbREST', '$timeout', AngularListTaxonomyEditorDirective]);

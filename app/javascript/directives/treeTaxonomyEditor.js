@@ -8,7 +8,7 @@
 
 'use strict';
 
-function AngularTreeTaxonomyEditorDirective($log, dbREST) {
+function AngularTreeTaxonomyEditorDirective($log, dbREST, $timeout) {
 
     var taxonomyMapping = {
         Basiselement: dbREST.BasiselementDomaene,
@@ -47,14 +47,14 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         scope.newItem = {name:''};
 
         scope.reloadTaxonomy = function () {
-            if (!(scope.taxonomy in taxonomyMapping)) {
+            if (taxonomyMapping[scope.taxonomy] == undefined) {
                 scope.data = [];
                 return;
             }
             taxonomyMapping[scope.taxonomy].query().$promise.then(function(result) {
-                scope.$apply(() => {
+                $timeout(() => {
                     scope.data = result;
-                });
+                }, 0);
             });
         };
 
@@ -115,4 +115,4 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 }
 
 angular.module('MUSE')
-    .directive('treeTaxonomyEditor', ['$log', 'dbREST', AngularTreeTaxonomyEditorDirective]);
+    .directive('treeTaxonomyEditor', ['$log', 'dbREST', '$timeout', AngularTreeTaxonomyEditorDirective]);
