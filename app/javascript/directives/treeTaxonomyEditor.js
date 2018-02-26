@@ -46,6 +46,8 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST, $timeout) {
         scope.selectedParent = '';
         scope.newItem = {name:''};
 
+        var first = true;
+
         scope.reloadTaxonomy = function () {
             if (taxonomyMapping[scope.taxonomy] == undefined) {
                 scope.data = [];
@@ -59,7 +61,8 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST, $timeout) {
         };
 
         scope.$watch('taxonomy', function (newVal, oldVal) {
-            if (newVal !== oldVal) {
+            if (first || newVal !== oldVal) {
+                first = false;
                 scope.reloadTaxonomy();
             }
         });

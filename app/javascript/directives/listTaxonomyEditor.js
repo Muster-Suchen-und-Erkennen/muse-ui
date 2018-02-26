@@ -11,8 +11,8 @@
 function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
 
     var taxonomyMapping = {
-        'Materialeindruck': dbREST.Materialeindruck,
-        'Farbeindruck': dbREST.Farbeindruck,
+        'Materialeindruck': dbREST.selectables.materialeindruecke,
+        'Farbeindruck': dbREST.selectables.farbeindruecke,
     };
 
     function link (scope, element, attr) {
@@ -21,6 +21,8 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
 
         scope.data = [];
         scope.newItem = {name:''};
+
+        var first = true;
 
         scope.reloadTaxonomy = function () {
             if (!(scope.taxonomy in taxonomyMapping)) {
@@ -35,7 +37,8 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
         };
 
         scope.$watch('taxonomy', function (newVal, oldVal) {
-            if (newVal !== oldVal) {
+            if (first || newVal !== oldVal) {
+                first = false;
                 scope.reloadTaxonomy();
             }
         });
