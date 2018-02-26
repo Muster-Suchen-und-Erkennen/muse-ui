@@ -28,7 +28,9 @@ function AngularListTaxonomyEditorDirective($log, dbREST) {
                 return;
             }
             taxonomyMapping[scope.taxonomy].query().$promise.then(function(result) {
-                scope.data = result;
+                scope.$apply(() => {
+                    scope.data = result;
+                });
             });
         };
 

@@ -92,6 +92,10 @@ angular.module('MUSE')
         $translateProvider.useSanitizeValueStrategy('escape');
     }])
 
+    .config(['$parseProvider', function($parseProvider) {
+        $parseProvider.unwrapPromises(true);
+    }])
+
     .run(['$rootScope', '$translate', '$location','$log','$anchorScroll', function ($rootScope, $translate, $location, $log, $anchorScroll) {
         $anchorScroll.yOffset = 100;
 
