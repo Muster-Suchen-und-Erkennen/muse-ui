@@ -5,7 +5,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <script type="text/ng-template" id="treeTaxonomyItem.html">
+                <script type="text/ng-template" id="listTaxonomyItem.html">
                     <input type="checkbox" id="tax-item-{{child.id}}", checked="true"/>
                     <label class="btn-group" for="tax-item-{{child.id}}">
                         <button ng-if="isEditable" class="btn btn-danger btn-xs"
@@ -17,15 +17,11 @@
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                         <span class="btn btn-default btn-xs">{{child.id}}</span>
-                        <button ng-if="isEditable" class="btn btn-xs btn-default"
-                            ng-click="selectAsParent(child)">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
                     </label>
                 </script>
 
                 <ul class="css-treeview">
-                    <li ng-repeat="child in data" ng-include="'treeTaxonomyItem.html'"></li>
+                    <li ng-repeat="child in data" ng-include="'listTaxonomyItem.html'"></li>
                     <li ng-if="isEditable">
                         <input class="form-control" style="display: inline; width: initial" type="text" ng-model="newItem.name"/>
                         <button class="btn btn-success" ng-click="addElement()"><span class="glyphicon glyphicon-ok"></span></button>

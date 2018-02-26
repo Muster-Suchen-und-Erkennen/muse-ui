@@ -1,5 +1,5 @@
 /**
- * Angular tree-taxonomy editor directive.
+ * Angular list-taxonomy editor directive.
  *
  * @description: A directive to edit taxonomies.
  *
@@ -8,7 +8,7 @@
 
 'use strict';
 
-function AngularTreeTaxonomyEditorDirective($log, dbREST) {
+function AngularListTaxonomyEditorDirective($log, dbREST) {
 
     var taxonomyMapping = {
         'Materialeindruck': dbREST.Materialeindruck,
@@ -81,4 +81,4 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 }
 
 angular.module('MUSE')
-    .directive('treeTaxonomyEditor', ['$log', 'dbREST', AngularTreeTaxonomyEditorDirective]);
+    .directive('listTaxonomyEditor', ['$log', 'dbREST', AngularListTaxonomyEditorDirective]);
