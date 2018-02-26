@@ -10,7 +10,7 @@ angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$rootScope', '$h
 
 
     $scope.taxonomies = [];
-    $scope.currentTaxonomy = 'test';
+    $scope.currentTaxonomy = null;
     $scope.isTaxAdmin = false;
 
     dbREST.EditableTaxonomies.get().$promise.then(function(result) {

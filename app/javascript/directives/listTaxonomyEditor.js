@@ -11,31 +11,8 @@
 function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     var taxonomyMapping = {
-        Basiselement: dbREST.BasiselementDomaene,
-        Genre: dbREST.Genres,
-        Körpermodifikationen: dbREST.Koerpermodifikationen,
-        Material: dbREST.Materialien,
-        Produktionsort: dbREST.Produktionsorte,
-        Beruf: dbREST.Rollenberufe,
-        Spielort: dbREST.Spielorte,
-        'Spielort (Detail)': dbREST.SpielortDetails,
-        Spielzeit: dbREST.Spielzeiten,
-        Stereotyp: dbREST.Stereotypen,
-        Teilelement: dbREST.TeilelementDomaene,
-
-        'Charaktereigenschaft': dbREST.Charaktereigenschaft,
-        'Tageszeit': dbREST.Tageszeit,
-        'Alterseindruck': dbREST.Alterseindruck,
-        'Zustand': dbREST.Zustand,
-        'Farbe': dbREST.Farbe,
-        'Farbkonzept': dbREST.Farbkonzept,
-        'Design': dbREST.Design,
-        'Form': dbREST.Form,
-        'Trageweise': dbREST.Trageweise,
-        'Funktion': dbREST.Funktion,
-        'Operator': dbREST.Operator,
-        'Körperteil': dbREST.Körperteil,
-        'Dominante Charaktereigenschaft': dbREST.Typus,
+        'Materialeindruck': dbREST.Materialeindruck,
+        'Farbeindruck': dbREST.Farbeindruck,
     };
 
     function link (scope, element, attr) {
@@ -43,7 +20,6 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
         scope.isEditable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
 
         scope.data = [];
-        scope.selectedParent = '';
         scope.newItem = {name:''};
 
         scope.reloadTaxonomy = function () {
@@ -62,20 +38,12 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
             }
         });
 
-        scope.selectAsParent = function (item) {
-            if (!scope.isEditable) {
-                return;
-            }
-            scope.selectedParent = item.id;
-        };
-
         scope.addElement = function () {
             if (!scope.isEditable) {
                 return;
             }
             var body = {
                 name: scope.newItem.name,
-                parent: scope.selectedParent,
             };
             dbREST.AddTaxonomyItem.save({taxonomy: scope.taxonomy}, body, function (success) {
                 scope.reloadTaxonomy();
@@ -103,7 +71,7 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST) {
 
     return {
         restrict: 'E',
-        templateUrl: 'templates/directives/treeTaxonomyEditor.html',
+        templateUrl: 'templates/directives/listTaxonomyEditor.html',
         scope: {
             editable: '@?',
             taxonomy: '@',
