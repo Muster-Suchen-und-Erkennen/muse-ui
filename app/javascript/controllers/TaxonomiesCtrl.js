@@ -30,4 +30,8 @@ angular.module('MUSE').controller('TaxonomiesCtrl', ['$scope', '$rootScope', '$h
         $scope.currentTaxonomy = item;
     };
 
+    $scope.isEditable = function() {
+        return $scope.isTaxAdmin && $scope.currentTaxonomy && $scope.currentTaxonomy.editable;
+    }
+
 }]);
