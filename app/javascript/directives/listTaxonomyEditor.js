@@ -29,7 +29,7 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
                 scope.data = [];
                 return;
             }
-            taxonomyMapping[scope.taxonomy].query().$promise.then(function(result) {
+            taxonomyMapping[scope.taxonomy].$promise.then(function(result) {
                 $timeout(() => {
                     scope.data = result;
                 }, 0);
