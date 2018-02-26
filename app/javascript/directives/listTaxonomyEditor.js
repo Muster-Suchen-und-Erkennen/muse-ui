@@ -11,8 +11,8 @@
 function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
 
     var taxonomyMapping = {
-        'Materialeindruck': dbREST.selectables.materialeindruecke,
-        'Farbeindruck': dbREST.selectables.farbeindruecke,
+        'Materialeindruck': [dbREST.selectables.materialeindruecke, 'Materialeindruckname'],
+        'Farbeindruck': [dbREST.selectables.farbeindruecke, 'Farbeindruckname'],
     };
 
     function link (scope, element, attr) {
@@ -20,6 +20,7 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
         scope.isEditable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
 
         scope.data = [];
+        scope.key = '';
         scope.newItem = {name:''};
 
         var first = true;
@@ -29,7 +30,8 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
                 scope.data = [];
                 return;
             }
-            taxonomyMapping[scope.taxonomy].$promise.then(function(result) {
+            scope.key = taxonomyMapping[scope.taxonomy][1];
+            taxonomyMapping[scope.taxonomy][0].$promise.then(function(result) {
                 $timeout(() => {
                     scope.data = result;
                 }, 0);
@@ -62,7 +64,7 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
             if (!scope.isEditable) {
                 return;
             }
-            dbREST.DeleteTaxonomyItem.delete({taxonomy: scope.taxonomy, name: item.id}, function (success) {
+            dbREST.DeleteTaxonomyItem.delete({taxonomy: scope.taxonomy, name: item[scope.key]}, function (success) {
                 scope.reloadTaxonomy();
             }, function (htmlStatus) {
                 // something bad happened
