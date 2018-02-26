@@ -45,6 +45,10 @@ function AngularListTaxonomyEditorDirective($log, dbREST, $timeout) {
             }
         });
 
+        scope.$watch('editable', function (newVal, oldVal) {
+            scope.isEditable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
+        });
+
         scope.addElement = function () {
             if (!scope.isEditable) {
                 return;

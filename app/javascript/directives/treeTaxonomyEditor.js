@@ -67,6 +67,10 @@ function AngularTreeTaxonomyEditorDirective($log, dbREST, $timeout) {
             }
         });
 
+        scope.$watch('editable', function (newVal, oldVal) {
+            scope.isEditable = angular.isDefined(scope.editable) ? (scope.editable !== 'false' ? true : false) : false;
+        });
+
         scope.selectAsParent = function (item) {
             if (!scope.isEditable) {
                 return;
