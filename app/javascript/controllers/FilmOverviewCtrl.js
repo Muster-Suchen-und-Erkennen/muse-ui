@@ -8,7 +8,12 @@
  * FilmOverviewCtrl
  */
 angular.module('MUSE').controller('FilmOverviewCtrl', ['$scope', 'dbREST', '$route', '$timeout', '$log', function ($scope, dbREST, $route, $timeout, $log) {
-    $scope.filme = dbREST.Filme.query();
+    $scope.filme = [];
+    dbREST.Filme.query().$promise.then(function(result) {
+        $timeout(() => {
+            $scope.filme = result;
+        }, 0);
+    });
     $scope.abc = ['#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     $scope.selectedFilm = {};
 
