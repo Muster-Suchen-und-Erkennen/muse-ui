@@ -69,13 +69,13 @@ angular.module('MUSE').controller('IndexCtrl',['$scope', '$rootScope', '$locatio
         if ($rootScope.loggedIn == true) {
             for (var i=0; i<$scope.menu.length; i++) {
                 if ( $scope.menu[i].label == 'LOGIN' ) {
-                    $scope.menu[i].label = 'LOGOUT';
+                    $scope.menu[i].label = 'BENUTZER';
                     break;
                 }        }        }
         if ($rootScope.loggedIn == false)
         {
             for (var j=0; j<$scope.menu.length; j++) {
-                if ( $scope.menu[j].label == 'LOGOUT' ) {
+                if ( $scope.menu[j].label == 'BENUTZER' ) {
                     $scope.menu[j].label = 'LOGIN';
                     break;
                 }

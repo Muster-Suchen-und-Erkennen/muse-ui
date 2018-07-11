@@ -257,11 +257,11 @@ var translationsDE = {
     ANALYSIS: 'Auswertung',
 
     //Statistic panel
-    STATISTIK: 'Staistik:',
+    STATISTIK: 'Statistik:',
     NR_OF_FILMS: 'Anzahl erfasster Filme',
     NR_OF_COSTUMES: 'Anzahl erfasster Kostüme',
     NR_OF_COSTUMES_PER_FILM: 'Durchschnittliche Anzahl erfasster Kostüme pro Film',
-    NR_OF_BASE_ELEMENTS: 'Anzahl erfasster Base Elements',
+    NR_OF_BASE_ELEMENTS: 'Anzahl erfasster Basiselemente',
     NR_OF_BASE_ELEMENTS_PER_COSTUME: 'Durchschnittliche Anzahl erfasster Basiselemente pro Kostüm',
     NR_OF_PRIMITIVES: 'Anzahl erfasster Teilelemente',
     NR_OF_PRIMITIVES_PER_COSTUME: 'Durchschnittliche Anzahl erfasster Teilelemente pro Kostüm',
@@ -544,7 +544,7 @@ var translationsEN = {
     ANALYSIS: 'Analyse',
 
     //Statistic panel
-    STATISTIK: 'Staistic:',
+    STATISTIK: 'Statistic:',
     NR_OF_FILMS: 'Nr. of Films',
     NR_OF_COSTUMES: 'Nr. of Costumes',
     NR_OF_COSTUMES_PER_FILM: 'Average Nr. of Costumes per Film',
