@@ -23,7 +23,7 @@ angular.module('MUSE').controller('GenreOverviewCtrl', ['$scope', 'dbREST', '$ro
                     backlog = backlog.concat(current.children);
                     current.children = null;
                 }
-                current.films = []
+                current.films = [];
                 tempGenres[current.label] = current;
                 current = backlog.pop();
             }
@@ -35,7 +35,7 @@ angular.module('MUSE').controller('GenreOverviewCtrl', ['$scope', 'dbREST', '$ro
 
 
 
-    filme.$promise.then(function () {
+    filme.$promise.then(function (filme) {
             var promises = [];
             filme.forEach(function (film) {
                 // get genres for film
@@ -51,11 +51,13 @@ angular.module('MUSE').controller('GenreOverviewCtrl', ['$scope', 'dbREST', '$ro
                 });
             });
             $q.all(promises).then(function () {
-                $scope.genres = [];
+                var temp = [];
                 for (var key in tempGenres) {
-                    $scope.genres.push(tempGenres[key]);
+                    temp.push(tempGenres[key]);
                 }
-                $scope.$apply();
+                $timeout(() => {
+                    $scope.genres = temp;
+                }, 0);
             });
         } , function (params) {
 
