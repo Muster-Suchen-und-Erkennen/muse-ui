@@ -61,6 +61,55 @@
 
                     </div>
                 </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ 'DIAGNOSTIC' | translate}}</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <details>
+                                <summary>
+                                    {{'ROLES_WITHOUT_STEREOTYPE' | translate}}
+                                </summary>
+                                <ul>
+                                    <li ng-repeat="role in diagnostic.rolesWithoutStereotype">
+                                        <a href="#/filme/{{role.FilmID}}/rollen/{{role.RollenID}}/">
+                                            {{role|json}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </details>
+                            <details>
+                                <summary>
+                                    {{'ROLES_WITHOUT_DOMINANT_CHARACTER' | translate}}
+                                </summary>
+                                <ul>
+                                    <li ng-repeat="role in diagnostic.rolesWithoutDominantCharacter">
+                                        <a href="#/filme/{{role.FilmID}}/rollen/{{role.RollenID}}/">
+                                            {{role|json}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </details>
+                            <details>
+                                <summary>
+                                    {{'COSTUMES_WITHOUT_DOMINANT_COLOR_OR_STATE' | translate}}
+                                </summary>
+                                <ul>
+                                    <li ng-repeat="costume in diagnostic.costumesWithoutDominantColorOrState">
+                                        <a href="#/filme/{{costume.FilmID}}/rollen/{{costume.RollenID}}/kostueme/{{costume.KostuemID}}">
+                                            {{costume|json}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </details>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

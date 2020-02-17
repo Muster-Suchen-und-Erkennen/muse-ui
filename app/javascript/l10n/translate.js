@@ -269,6 +269,12 @@ var translationsDE = {
     ASSIGNED_COLORS: '~Anzahl zugewiesener Farben',
     ASSIGNED_MATERIALS: '~Anzahl zugewiesener Materialien',
 
+    //Diagnostics panel
+    DIAGNOSTIC: 'Diagnose:',
+    ROLES_WITHOUT_STEREOTYPE: 'Rollen ohne Stereotyp:',
+    ROLES_WITHOUT_DOMINANT_CHARACTER: 'Rollen ohne dominanten Charakter:',
+    COSTUMES_WITHOUT_DOMINANT_COLOR_OR_STATE: 'Kostüme ohne dominante Farbe oder ohne dominanten Zustand:',
+
     //Taxonomy page
     TAXONOMIES: 'Taxonomien',
 
@@ -555,6 +561,12 @@ var translationsEN = {
     NR_OF_PRIMITIVES_PER_BASE_ELEMENT: 'Average Nr. of Primitives per Base Element',
     ASSIGNED_COLORS: '~Nr. of assigned Colors',
     ASSIGNED_MATERIALS: '~Nr. of assigned Materials',
+
+    //Diagnostics panel
+    DIAGNOSTIC: 'Diagnostics:',
+    ROLES_WITHOUT_STEREOTYPE: 'Roles Without Stereotype:',
+    ROLES_WITHOUT_DOMINANT_CHARACTER: 'Roles Without Dominant Character:',
+    COSTUMES_WITHOUT_DOMINANT_COLOR_OR_STATE: 'Costumes Without Dominant Color or Without Dominant Status:',
 
     //Taxonomy page
     TAXONOMIES: 'Taxonomies',

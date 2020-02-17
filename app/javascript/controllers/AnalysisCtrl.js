@@ -10,6 +10,7 @@ angular.module('MUSE').controller('AnalysisCtrl', ['$scope', '$http','dbREST','$
 
 
     $scope.statistic = dbREST.Statistic.get();
+    $scope.diagnostic = dbREST.Diagnostic.get();
 
 
 }]);
